@@ -3,39 +3,39 @@
   <entry>
     <title><![CDATA[Hello World]]></title>
     <url>%2Fen%2Fposts%2FHello-World%2F</url>
-    <content type="text"><![CDATA[--- title: Hello World date: 2018-03-20 tags: Others --- # Hello World Finally, done with the construction. Mainly for technology sharing and discussing, and occasionally talk about other stuff. 😂 Introduction: - Ideas: Inspiration sharing - Books: Book recommendation - Courses: Course collection ``` Java // Java class HelloWorld { public static void main() { System.out.println("Hello World!"); } } ``` ``` C++ // C++ #include "iostream" int main() { std::cout < "Hello World!" < std::endl; return 0; } ``` ``` C // C #include "stdio.h" int main() { printf("Hello World!\n"); return 0; } ``` ``` Python # Python print("Hello World!") ``` ``` JavaScript // JavaScript Console.log("Hello World!"); ```]]></content>
+    <content type="text"><![CDATA[Hello WorldFinally, done with the construction. Mainly for technology sharing and discussing, and occasionally talk about other stuff. 😂 Introduction: Ideas: Inspiration sharing Books: Book recommendation Courses: Course collection 1234567// Javaclass HelloWorld &#123; public static void main() &#123; System.out.println("Hello World!"); &#125;&#125; 1234567// C++#include "iostream"int main() &#123; std::cout &lt;&lt; "Hello World!" &lt;&lt; std::endl; return 0;&#125; 1234567// C#include "stdio.h"int main() &#123; printf("Hello World!\n"); return 0;&#125; 12# Pythonprint("Hello World!") 12// JavaScriptConsole.log("Hello World!");]]></content>
       <tags>
         <tag>Others</tag>
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[About]]></title>
-    <url>%2Fen%2Fabout%2Findex.html</url>
-    <content type="text"><![CDATA[--- title: About date: false --- Love Computer Love Internet Love Artificial Intelligence Geek Perfectionist Interest and Curiosity Driven Stay hungry, Stay foolish.]]></content>
-  </entry>
-  <entry>
     <title><![CDATA[Books]]></title>
     <url>%2Fen%2Fbooks%2Findex.html</url>
-    <content type="text"><![CDATA[--- title: Books date: false comments: false ---]]></content>
+    <content type="text"></content>
   </entry>
   <entry>
     <title><![CDATA[Categories]]></title>
     <url>%2Fen%2Fcategories%2Findex.html</url>
-    <content type="text"><![CDATA[--- title: Categories type: "categories" date: false comments: false ---]]></content>
+    <content type="text"></content>
+  </entry>
+  <entry>
+    <title><![CDATA[About]]></title>
+    <url>%2Fen%2Fabout%2Findex.html</url>
+    <content type="text"><![CDATA[Love ComputerLove InternetLove Artificial Intelligence GeekPerfectionistInterest and Curiosity Driven Stay hungry, Stay foolish.]]></content>
   </entry>
   <entry>
     <title><![CDATA[Courses]]></title>
     <url>%2Fen%2Fcourses%2Findex.html</url>
-    <content type="text"><![CDATA[--- title: Courses date: false comments: false ---]]></content>
-  </entry>
-  <entry>
-    <title><![CDATA[Ideas]]></title>
-    <url>%2Fen%2Fideas%2Findex.html</url>
-    <content type="text"><![CDATA[--- title: Ideas date: false comments: false ---]]></content>
+    <content type="text"></content>
   </entry>
   <entry>
     <title><![CDATA[Tags]]></title>
     <url>%2Fen%2Ftags%2Findex.html</url>
-    <content type="text"><![CDATA[--- title: Tags type: "tags" date: false comments: false ---]]></content>
+    <content type="text"></content>
+  </entry>
+  <entry>
+    <title><![CDATA[Ideas]]></title>
+    <url>%2Fen%2Fideas%2Findex.html</url>
+    <content type="text"></content>
   </entry>
 </search>
