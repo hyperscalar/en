@@ -9,6 +9,11 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[About]]></title>
+    <url>%2Fen%2Fabout%2Findex.html</url>
+    <content type="text"><![CDATA[Love ComputerLove InternetLove Artificial Intelligence GeekPerfectionistInterest and Curiosity Driven Stay hungry, Stay foolish.]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[Books]]></title>
     <url>%2Fen%2Fbooks%2Findex.html</url>
     <content type="text"></content>
@@ -17,11 +22,6 @@
     <title><![CDATA[Categories]]></title>
     <url>%2Fen%2Fcategories%2Findex.html</url>
     <content type="text"></content>
-  </entry>
-  <entry>
-    <title><![CDATA[About]]></title>
-    <url>%2Fen%2Fabout%2Findex.html</url>
-    <content type="text"><![CDATA[Love ComputerLove InternetLove Artificial Intelligence GeekPerfectionistInterest and Curiosity Driven Stay hungry, Stay foolish.]]></content>
   </entry>
   <entry>
     <title><![CDATA[Courses]]></title>
