@@ -9,18 +9,23 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[About]]></title>
-    <url>%2Fen%2Fabout%2Findex.html</url>
-    <content type="text"><![CDATA[Love ComputerLove InternetLove Artificial Intelligence GeekPerfectionistInterest and Curiosity Driven Stay hungry, Stay foolish.]]></content>
-  </entry>
-  <entry>
     <title><![CDATA[Books]]></title>
     <url>%2Fen%2Fbooks%2Findex.html</url>
     <content type="text"></content>
   </entry>
   <entry>
+    <title><![CDATA[About]]></title>
+    <url>%2Fen%2Fabout%2Findex.html</url>
+    <content type="text"><![CDATA[Love ComputerLove InternetLove Artificial Intelligence GeekPerfectionistInterest and Curiosity Driven Stay hungry, Stay foolish.]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[Categories]]></title>
     <url>%2Fen%2Fcategories%2Findex.html</url>
+    <content type="text"></content>
+  </entry>
+  <entry>
+    <title><![CDATA[Tags]]></title>
+    <url>%2Fen%2Ftags%2Findex.html</url>
     <content type="text"></content>
   </entry>
   <entry>
@@ -31,11 +36,6 @@
   <entry>
     <title><![CDATA[Ideas]]></title>
     <url>%2Fen%2Fideas%2Findex.html</url>
-    <content type="text"></content>
-  </entry>
-  <entry>
-    <title><![CDATA[Tags]]></title>
-    <url>%2Fen%2Ftags%2Findex.html</url>
     <content type="text"></content>
   </entry>
 </search>
