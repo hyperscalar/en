@@ -19,11 +19,6 @@
     <content type="text"></content>
   </entry>
   <entry>
-    <title><![CDATA[Categories]]></title>
-    <url>%2Fen%2Fcategories%2Findex.html</url>
-    <content type="text"></content>
-  </entry>
-  <entry>
     <title><![CDATA[Courses]]></title>
     <url>%2Fen%2Fcourses%2Findex.html</url>
     <content type="text"></content>
@@ -31,6 +26,11 @@
   <entry>
     <title><![CDATA[Ideas]]></title>
     <url>%2Fen%2Fideas%2Findex.html</url>
+    <content type="text"></content>
+  </entry>
+  <entry>
+    <title><![CDATA[Categories]]></title>
+    <url>%2Fen%2Fcategories%2Findex.html</url>
     <content type="text"></content>
   </entry>
   <entry>

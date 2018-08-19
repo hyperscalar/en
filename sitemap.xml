@@ -2,13 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://devtunes.github.io/en/categories/index.html</loc>
-    
-    <lastmod>2018-07-04T16:49:02.053Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://devtunes.github.io/en/courses/index.html</loc>
     
     <lastmod>2018-07-04T16:49:02.053Z</lastmod>
@@ -17,6 +10,13 @@
   
   <url>
     <loc>https://devtunes.github.io/en/ideas/index.html</loc>
+    
+    <lastmod>2018-07-04T16:49:02.053Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://devtunes.github.io/en/categories/index.html</loc>
     
     <lastmod>2018-07-04T16:49:02.053Z</lastmod>
     

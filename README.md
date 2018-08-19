@@ -1,1 +1,1 @@
-# [Notes of Learning & Exploring](https://devtunes.github.io/en)
+# [Learn & Explore](https://devtunes.github.io/en)
