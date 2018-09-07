@@ -62,19 +62,19 @@
 
 <link href="/en/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/en/css/main.css?v=6.4.0" rel="stylesheet" type="text/css" />
+<link href="/en/css/main.css?v=6.4.1" rel="stylesheet" type="text/css" />
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/en/images/apple-touch-icon-lightbulb.png?v=6.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/en/images/apple-touch-icon-lightbulb.png?v=6.4.1">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/en/images/favicon-32x32-lightbulb.png?v=6.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/en/images/favicon-32x32-lightbulb.png?v=6.4.1">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/en/images/favicon-16x16-lightbulb.png?v=6.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/en/images/favicon-16x16-lightbulb.png?v=6.4.1">
 
 
-  <link rel="mask-icon" href="/en/images/logo-lightbulb.svg?v=6.4.0" color="#E91E63">
+  <link rel="mask-icon" href="/en/images/logo-lightbulb.svg?v=6.4.1" color="#E91E63">
 
 
 
@@ -89,13 +89,13 @@
   var CONFIG = {
     root: '/en/',
     scheme: 'Gemini',
-    version: '6.4.0',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    version: '6.4.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     fastclick: true,
     lazyload: true,
     tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     algolia: {
       applicationID: '',
       apiKey: '',
@@ -536,6 +536,12 @@
 
           
           
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="cc-opacity" target="_blank" rel="external nofollow">
+                <img src="/en/images/cc-by-sa.svg" alt="Creative Commons" />
+              </a>
+            </div>
+          
 
           
           
@@ -553,6 +559,8 @@
       
         <div class="back-to-top">
           <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
           
         </div>
       
@@ -645,15 +653,15 @@
 
 
 
+
+
+
+
+
+
+
+
   
-
-
-
-
-
-
-
-
 
 
 
@@ -693,7 +701,7 @@
 
   
   
-    <script type="text/javascript" src="/en/lib/canvas-nest/canvas-nest.min.js"></script>
+    <script id="ribbon" type="text/javascript" size="256" alpha="0.6"  zIndex="-1" src="/en/lib/canvas-ribbon/canvas-ribbon.js"></script>
   
 
   
@@ -705,32 +713,32 @@
   
 
 
-  <script type="text/javascript" src="/en/js/src/utils.js?v=6.4.0"></script>
+  <script type="text/javascript" src="/en/js/src/utils.js?v=6.4.1"></script>
 
-  <script type="text/javascript" src="/en/js/src/motion.js?v=6.4.0"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/en/js/src/affix.js?v=6.4.0"></script>
-
-  <script type="text/javascript" src="/en/js/src/schemes/pisces.js?v=6.4.0"></script>
+  <script type="text/javascript" src="/en/js/src/motion.js?v=6.4.1"></script>
 
 
 
   
-  <script type="text/javascript" src="/en/js/src/scrollspy.js?v=6.4.0"></script>
-<script type="text/javascript" src="/en/js/src/post-details.js?v=6.4.0"></script>
+  
+
+
+  <script type="text/javascript" src="/en/js/src/affix.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/en/js/src/schemes/pisces.js?v=6.4.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/en/js/src/scrollspy.js?v=6.4.1"></script>
+<script type="text/javascript" src="/en/js/src/post-details.js?v=6.4.1"></script>
 
 
 
   
 
 
-  <script type="text/javascript" src="/en/js/src/bootstrap.js?v=6.4.0"></script>
+  <script type="text/javascript" src="/en/js/src/bootstrap.js?v=6.4.1"></script>
 
 
 
@@ -1149,8 +1157,8 @@
 
 
   
-  <script type="text/javascript" src="/en/js/src/js.cookie.js?v=6.4.0"></script>
-  <script type="text/javascript" src="/en/js/src/scroll-cookie.js?v=6.4.0"></script>
+  <script type="text/javascript" src="/en/js/src/js.cookie.js?v=6.4.1"></script>
+  <script type="text/javascript" src="/en/js/src/scroll-cookie.js?v=6.4.1"></script>
 
 
   
