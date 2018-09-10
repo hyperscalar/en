@@ -4,8 +4,11 @@
     <title><![CDATA[Hello World]]></title>
     <url>%2Fen%2Fposts%2FHello-World%2F</url>
     <content type="text"><![CDATA[Hello WorldFinally, done with the construction. Mainly for technology sharing and discussing, and occasionally talk about other stuff. 😂 Introduction: Ideas: Inspiration sharing Books: Book recommendation Courses: Course collection 1234567// Javaclass HelloWorld &#123; public static void main() &#123; System.out.println("Hello World!"); &#125;&#125; 1234567// C++#include "iostream"int main() &#123; std::cout &lt;&lt; "Hello World!" &lt;&lt; std::endl; return 0;&#125; 1234567// C#include "stdio.h"int main() &#123; printf("Hello World!\n"); return 0;&#125; 12# Pythonprint("Hello World!") 12// JavaScriptConsole.log("Hello World!");]]></content>
+      <categories>
+        <category>Miscellaneous</category>
+      </categories>
       <tags>
-        <tag>Others</tag>
+        <tag>Test</tag>
       </tags>
   </entry>
   <entry>
