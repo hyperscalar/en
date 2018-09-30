@@ -1914,7 +1914,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #d769ff;
+  background: #8adb28;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3173,5 +3173,5 @@ ul.breadcrumb li+li:last-child {
   opacity: 0.9;
 }
 .content-wrap {
-  line-height: 1.5;
+  line-height: 1.75;
 }
