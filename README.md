@@ -1,1 +1,1 @@
-# [Learn & Explore](https://devtunes.github.io/en)
+# [Learn & Explore](https://bitrhythm.github.io/en)
