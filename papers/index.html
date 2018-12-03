@@ -113,19 +113,20 @@
 
 
   <meta name="description" content="Stay hungry, Stay foolish.">
-<meta name="keywords" content="Technology, Engineering, Computer Science, Algorithm, Machine Learning, Backend">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Papers">
 <meta property="og:url" content="https://bitrhythm.github.io/en/papers/index.html">
 <meta property="og:site_name" content="Learn &amp; Explore">
 <meta property="og:description" content="Stay hungry, Stay foolish.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-11-26T14:56:19.937Z">
+<meta property="og:updated_time" content="2018-11-30T15:12:11.345Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Papers">
 <meta name="twitter:description" content="Stay hungry, Stay foolish.">
 
 
+
+  <link rel="alternate" href="/en/atom.xml" title="Learn & Explore" type="application/atom+xml">
 
 
 
@@ -464,7 +465,7 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="/en/images/avatar-sf.png" alt="Bruce He">
+              <img class="site-author-image" itemprop="image" src="/en/images/avatar-ada.png" alt="Bruce He">
             
               <p class="site-author-name" itemprop="name">Bruce He</p>
               <p class="site-description motion-element" itemprop="description">Stay hungry, Stay foolish.</p>
@@ -515,6 +516,13 @@
             </nav>
           
 
+          
+            <div class="feed-link motion-element">
+              <a href="/en/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
           
 
           
@@ -705,7 +713,7 @@
 
   
   
-    <script id="ribbon" type="text/javascript" size="128" alpha="0.8" zindex="-1" src="/en/lib/canvas-ribbon/ribbon.min.js"></script>
+    <script id="ribbon" type="text/javascript" size="128" alpha="1" zindex="-1" src="/en/lib/ribbon/dist/ribbon.min.js"></script>
   
 
   
@@ -1027,7 +1035,7 @@
 
                   // select top N slices in content
 
-                  var upperBound = parseInt('1');
+                  var upperBound = parseInt('-1');
                   if (upperBound >= 0) {
                     slicesOfContent = slicesOfContent.slice(0, upperBound);
                   }
@@ -1160,11 +1168,6 @@
   
 
   
-  
-  
-  <script src="/en/lib/pangu/dist/pangu.min.js?v=3.3"></script>
-  <script type="text/javascript">pangu.spacingPage();</script>
-
 
   
   <script type="text/javascript" src="/en/js/src/js.cookie.js?v=6.4.2"></script>
@@ -1240,6 +1243,9 @@
         ta.focus()
         var result = document.execCommand('copy')
         document.body.removeChild(ta)
+        
+          if(result)$(this).text('Copied')
+          else $(this).text('Copy failed')
         
         $(this).blur()
       })).on('mouseleave', function (e) {

@@ -765,7 +765,7 @@ pre .javascript .function {
   border: initial;
   border-left: 3px solid #eee;
   background-color: #f9f9f9;
-  border-radius: 3px;
+  border-radius: 2px;
 }
 .post-body .note h2,
 .post-body .note h3,
@@ -1115,14 +1115,17 @@ pre .javascript .function {
   margin: 10px;
 }
 .back-to-top {
-  visibility: hidden;
-  margin: 8px -10px -20px;
+  display: none;
+  margin: 20px -10px -20px;
   background: #eee;
   font-size: 12px;
   opacity: 0.6;
   cursor: pointer;
   text-align: center;
   -webkit-transform: translateZ(0);
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+  transition-delay: 0s;
 }
 .back-to-top:hover {
   opacity: 0.8;
@@ -1138,10 +1141,7 @@ pre .javascript .function {
   }
 }
 .back-to-top.back-to-top-on {
-  visibility: visible;
-  transition-duration: 0.2s;
-  transition-timing-function: ease-in-out;
-  transition-delay: 0s;
+  display: block;
 }
 .header {
   background: transparent;
@@ -1839,6 +1839,9 @@ pre .javascript .function {
   border: 1px solid #eee;
   opacity: 1;
 }
+.site-author-image {
+  border-radius: 100%;
+}
 .site-author-name {
   margin: 0;
   text-align: center;
@@ -1924,7 +1927,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #58b3ff;
+  background: #c617ff;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2018,7 +2021,6 @@ pre .javascript .function {
 .post-toc .nav-item {
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
   line-height: 1.8;
 }
 .post-toc .nav .nav-child {
@@ -3175,16 +3177,4 @@ ul.breadcrumb li+li:last-child {
   .pagination {
     margin: 8px 0 0;
   }
-}
-.header-inner {
-  opacity: 0.9;
-}
-.main-inner {
-  opacity: 0.9;
-}
-.content-wrap {
-  line-height: 1.75;
-}
-p {
-  margin: 0.25em 0px;
 }

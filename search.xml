@@ -1,20 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[Hello World]]></title>
-    <url>%2Fen%2Fposts%2FHello-World%2F</url>
-    <content type="text"><![CDATA[Hello WorldFinally, done with the construction. Mainly for technology sharing and discussing, and occasionally talk about other stuff. 😂 Introduction: Ideas: Inspiration sharing Books: Book recommendation Courses: Course collection 1234567// Javaclass HelloWorld &#123; public static void main() &#123; System.out.println("Hello World!"); &#125;&#125; 1234567// C++#include "iostream"int main() &#123; std::cout &lt;&lt; "Hello World!" &lt;&lt; std::endl; return 0;&#125; 1234567// C#include "stdio.h"int main() &#123; printf("Hello World!\n"); return 0;&#125; 12# Pythonprint("Hello World!") 12// JavaScriptConsole.log("Hello World!");]]></content>
-      <categories>
-        <category>Miscellaneous</category>
-      </categories>
-      <tags>
-        <tag>Test</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[About]]></title>
     <url>%2Fen%2Fabout%2Findex.html</url>
-    <content type="text"><![CDATA[Love ComputerLove InternetLove Artificial Intelligence GeekPerfectionistInterest and Curiosity Driven Stay hungry, Stay foolish.]]></content>
+    <content type="text"><![CDATA[Love Computer Love Internet Love Artificial Intelligence Geek Perfectionist Interest and Curiosity Driven Stay hungry, Stay foolish.]]></content>
   </entry>
   <entry>
     <title><![CDATA[Books]]></title>
@@ -27,13 +16,13 @@
     <content type="text"></content>
   </entry>
   <entry>
-    <title><![CDATA[Courses]]></title>
-    <url>%2Fen%2Fcourses%2Findex.html</url>
+    <title><![CDATA[Papers]]></title>
+    <url>%2Fen%2Fpapers%2Findex.html</url>
     <content type="text"></content>
   </entry>
   <entry>
-    <title><![CDATA[Papers]]></title>
-    <url>%2Fen%2Fpapers%2Findex.html</url>
+    <title><![CDATA[Courses]]></title>
+    <url>%2Fen%2Fcourses%2Findex.html</url>
     <content type="text"></content>
   </entry>
   <entry>

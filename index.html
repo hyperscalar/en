@@ -113,7 +113,6 @@
 
 
   <meta name="description" content="Stay hungry, Stay foolish.">
-<meta name="keywords" content="Technology, Engineering, Computer Science, Algorithm, Machine Learning, Backend">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Learn &amp; Explore">
 <meta property="og:url" content="https://bitrhythm.github.io/en/index.html">
@@ -125,6 +124,8 @@
 <meta name="twitter:description" content="Stay hungry, Stay foolish.">
 
 
+
+  <link rel="alternate" href="/en/atom.xml" title="Learn & Explore" type="application/atom+xml">
 
 
 
@@ -366,12 +367,12 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://bitrhythm.github.io/en/en/posts/Hello-World/">
+    <link itemprop="mainEntityOfPage" href="https://bitrhythm.github.io/en/en/posts/hello-world/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Bruce He">
       <meta itemprop="description" content="Stay hungry, Stay foolish.">
-      <meta itemprop="image" content="/en/images/avatar-sf.png">
+      <meta itemprop="image" content="/en/images/avatar-ada.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
@@ -385,7 +386,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/en/posts/Hello-World/" itemprop="url">
+                <a class="post-title-link" href="/en/posts/hello-world/" itemprop="url">
                   Hello World
                 </a>
               
@@ -412,7 +413,7 @@
                 
               
 
-              <time title="Created: 2018-03-20 00:00" itemprop="dateCreated datePublished" datetime="2018-03-20T00:00:00+08:00">2018-03-20</time>
+              <time title="Created: 2018-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2018-03-20T00:00:00+08:00">2018-03-20</time>
             
 
             
@@ -429,7 +430,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-09-10 00:00" itemprop="dateModified" datetime="2018-09-10T00:00:00+08:00">2018-09-10</time>
+                <time title="Modified: 2018-09-10 00:00:00" itemprop="dateModified" datetime="2018-09-10T00:00:00+08:00">2018-09-10</time>
               
             
           </span>
@@ -461,9 +462,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/en/posts/Hello-World/#comments" itemprop="discussionUrl">
+                <a href="/en/posts/hello-world/#comments" itemprop="discussionUrl">
                 
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="posts/Hello-World/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="posts/hello-world/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -485,7 +486,7 @@
                 
                   <span class="post-meta-item-text">Symbols count in article: </span>
                 
-                <span title="Symbols count in article">666</span>
+                <span title="Symbols count in article">667</span>
               
 
               
@@ -520,7 +521,8 @@
 
       
         
-          <h1 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h1><p>Finally, done with the construction.</p>
+          <h1>Hello World</h1>
+<p>Finally, done with the construction.</p>
 <p>Mainly for technology sharing and discussing, and occasionally talk about other stuff. 😂</p>
 <p>Introduction:</p>
 <ul>
@@ -530,7 +532,7 @@
 </ul>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/en/posts/Hello-World/#more" rel="contents">
+            <a class="btn" href="/en/posts/hello-world/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -603,7 +605,7 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="/en/images/avatar-sf.png" alt="Bruce He">
+              <img class="site-author-image" itemprop="image" src="/en/images/avatar-ada.png" alt="Bruce He">
             
               <p class="site-author-name" itemprop="name">Bruce He</p>
               <p class="site-description motion-element" itemprop="description">Stay hungry, Stay foolish.</p>
@@ -654,6 +656,13 @@
             </nav>
           
 
+          
+            <div class="feed-link motion-element">
+              <a href="/en/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
           
 
           
@@ -844,7 +853,7 @@
 
   
   
-    <script id="ribbon" type="text/javascript" size="128" alpha="0.8" zindex="-1" src="/en/lib/canvas-ribbon/ribbon.min.js"></script>
+    <script id="ribbon" type="text/javascript" size="128" alpha="1" zindex="-1" src="/en/lib/ribbon/dist/ribbon.min.js"></script>
   
 
   
@@ -1127,7 +1136,7 @@
 
                   // select top N slices in content
 
-                  var upperBound = parseInt('1');
+                  var upperBound = parseInt('-1');
                   if (upperBound >= 0) {
                     slicesOfContent = slicesOfContent.slice(0, upperBound);
                   }
@@ -1264,11 +1273,6 @@
   
 
   
-  
-  
-  <script src="/en/lib/pangu/dist/pangu.min.js?v=3.3"></script>
-  <script type="text/javascript">pangu.spacingPage();</script>
-
 
   
   <script type="text/javascript" src="/en/js/src/js.cookie.js?v=6.4.2"></script>
@@ -1344,6 +1348,9 @@
         ta.focus()
         var result = document.execCommand('copy')
         document.body.removeChild(ta)
+        
+          if(result)$(this).text('Copied')
+          else $(this).text('Copy failed')
         
         $(this).blur()
       })).on('mouseleave', function (e) {
