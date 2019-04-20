@@ -38,11 +38,9 @@
 
 
 
-
-
   
   
-  <link rel="stylesheet" href="/en/lib/fancybox/source/jquery.fancybox.css?v=2.1.5">
+  <link rel="stylesheet" href="/en/lib/fancybox/source/jquery.fancybox.css">
 
 
 
@@ -52,19 +50,19 @@
 
 <link rel="stylesheet" href="/en/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
 
-<link rel="stylesheet" href="/en/css/main.css?v=6.7.0">
+<link rel="stylesheet" href="/en/css/main.css?v=7.1.0">
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/en/images/apple-touch-icon-lightbulb.png?v=6.7.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/en/images/apple-touch-icon-lightbulb.png?v=7.1.0">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/en/images/favicon-32x32-lightbulb.png?v=6.7.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/en/images/favicon-32x32-lightbulb.png?v=7.1.0">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/en/images/favicon-16x16-lightbulb.png?v=6.7.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/en/images/favicon-16x16-lightbulb.png?v=7.1.0">
 
 
-  <link rel="mask-icon" href="/en/images/logo-lightbulb.svg?v=6.7.0" color="#E91E63">
+  <link rel="mask-icon" href="/en/images/logo-lightbulb.svg?v=7.1.0" color="#E91E63">
 
 
 
@@ -77,8 +75,10 @@
   var CONFIG = {
     root: '/en/',
     scheme: 'Gemini',
-    version: '6.7.0',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    version: '7.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: true,
     fancybox: true,
     fastclick: true,
     lazyload: true,
@@ -113,11 +113,10 @@
 
 
 
-  <link rel="alternate" href="/en/atom.xml" title="Learn & Explore" type="application/atom+xml">
 
 
-
-
+  
+  
   <link rel="canonical" href="https://bitrhythm.github.io/en/tags/Test/">
 
 
@@ -491,6 +490,7 @@
   
 
 
+
           </div>
           
 
@@ -507,7 +507,6 @@
   </div>
 
   <aside id="sidebar" class="sidebar">
-    
     <div class="sidebar-inner">
 
       
@@ -521,7 +520,7 @@
               <img class="site-author-image" itemprop="image" src="/en/images/avatar-ada.png" alt="Bruce He">
             
               <p class="site-author-name" itemprop="name">Bruce He</p>
-              <p class="site-description motion-element" itemprop="description">Stay hungry, Stay foolish.</p>
+              <div class="site-description motion-element" itemprop="description">Stay hungry, Stay foolish.</div>
           </div>
 
           
@@ -541,7 +540,11 @@
                 
                 
                 <div class="site-state-item site-state-categories">
-                  <a href="/en/categories/index.html">
+                  
+                    
+                      <a href="/en/categories/">
+                    
+                  
                     
                     
                       
@@ -556,7 +559,11 @@
                 
                 
                 <div class="site-state-item site-state-tags">
-                  <a href="/en/tags/index.html">
+                  
+                    
+                      <a href="/en/tags/">
+                    
+                  
                     
                     
                       
@@ -570,12 +577,7 @@
           
 
           
-            <div class="feed-link motion-element">
-              <a href="/en/atom.xml" rel="alternate">
-                <i class="fa fa-rss"></i>
-                RSS
-              </a>
-            </div>
+
           
 
           
@@ -599,35 +601,18 @@
                   <a href="https://github.com/Bitrhythm" title="GitHub &rarr; https://github.com/Bitrhythm" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
                 </span>
               
-                <span class="links-of-author-item">
-                  
-                  
-                  
-                    
-                  
-                  <a href="https://gitlab.com/Algorhythm" title="GitLab &rarr; https://gitlab.com/Algorhythm" rel="noopener" target="_blank"><i class="fa fa-fw fa-gitlab"></i></a>
-                </span>
-              
-                <span class="links-of-author-item">
-                  
-                  
-                  
-                    
-                  
-                  <a href="https://stackoverflow.com/users/9355088/" title="StackOverflow &rarr; https://stackoverflow.com/users/9355088/" rel="noopener" target="_blank"><i class="fa fa-fw fa-stack-overflow"></i></a>
-                </span>
-              
             </div>
           
 
           
              <div class="cc-license motion-element" itemprop="license">
               
+              
                 
               
               
               
-              <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/en/images/cc-by-sa.svg" alt="Creative Commons"></a>
+              <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en" class="cc-opacity" rel="noopener" target="_blank"><img src="/en/images/cc-by-sa.svg" alt="Creative Commons"></a>
              </div>
           
 
@@ -648,13 +633,12 @@
         <div class="back-to-top">
           <i class="fa fa-arrow-up"></i>
           
-            <span id="scrollpercent"><span>0</span>%</span>
-          
         </div>
       
 
     </div>
   </aside>
+  
 
 
         
@@ -771,7 +755,7 @@
   <script src="/en/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
 
   
-  <script src="/en/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  <script src="/en/lib/fancybox/source/jquery.fancybox.pack.js"></script>
 
   
   <script src="/en/lib/reading_progress/reading_progress.js"></script>
@@ -780,53 +764,60 @@
   
 
 
-  <script src="/en/js/src/utils.js?v=6.7.0"></script>
+  <script src="/en/js/utils.js?v=7.1.0"></script>
 
-  <script src="/en/js/src/motion.js?v=6.7.0"></script>
-
-
-
-  
-  
-
-
-  <script src="/en/js/src/affix.js?v=6.7.0"></script>
-
-  <script src="/en/js/src/schemes/pisces.js?v=6.7.0"></script>
+  <script src="/en/js/motion.js?v=7.1.0"></script>
 
 
 
   
-
   
 
 
-  <script src="/en/js/src/bootstrap.js?v=6.7.0"></script>
+  <script src="/en/js/affix.js?v=7.1.0"></script>
+
+  <script src="/en/js/schemes/pisces.js?v=7.1.0"></script>
+
 
 
 
   
 
   
-    <script id="dsq-count-scr" src="https://bitrhythm-blog-en.disqus.com/count.js" async></script>
+
+
+  <script src="/en/js/next-boot.js?v=7.1.0"></script>
+
+
   
-
-  
-
-
-
-
-
-
-
-
-
-
-
+  <script src="/en/js/js.cookie.js?v=7.1.0"></script>
+  <script src="/en/js/scroll-cookie.js?v=7.1.0"></script>
 
 
   
 
+  
+  
+  
+
+  
+
+  
+  
+  
+
+
+  
+  
+  <script id="dsq-count-scr" src="https://bitrhythm-blog-en.disqus.com/count.js" async></script>
+
+
+
+
+
+
+
+  
   <script>
     // Popup Window;
     var isfetched = false;
@@ -1171,10 +1162,6 @@
   
 
   
-
-  
-
-  
   
 
   
@@ -1184,15 +1171,42 @@
 
 
   
+<script>
+if ($('body').find('div.pdf').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      $('body').find('div.pdf').each(function(i, o) {
+        PDFObject.embed($(o).attr('target'), $(o), {
+          pdfOpenParams: {
+            navpanes: 0,
+            toolbar: 0,
+            statusbar: 0,
+            pagemode: 'thumbs',
+            view: 'FitH'
+          },
+          PDFJS_URL: '/lib/pdf/web/viewer.html',
+          height: $(o).attr('height') || '768px'
+        });
+      });
+    },
+  });
+}
+</script>
+
 
   
 
   
 
   
-  <script src="/en/js/src/js.cookie.js?v=6.7.0"></script>
-  <script src="/en/js/src/scroll-cookie.js?v=6.7.0"></script>
 
+  
+
+  
 
   
 
@@ -1208,89 +1222,42 @@
 
 
   
-  <style>
-    .copy-btn {
-      display: inline-block;
-      padding: 6px 12px;
-      font-size: 13px;
-      font-weight: 700;
-      line-height: 20px;
-      color: #333;
-      white-space: nowrap;
-      vertical-align: middle;
-      cursor: pointer;
-      background-color: #eee;
-      background-image: linear-gradient(#fcfcfc, #eee);
-      border: 1px solid #d5d5d5;
-      border-radius: 3px;
-      user-select: none;
-      outline: 0;
-    }
-
-    .highlight-wrap .copy-btn {
-      transition: opacity .3s ease-in-out;
-      opacity: 0;
-      padding: 2px 6px;
-      position: absolute;
-      right: 4px;
-      top: 8px;
-    }
-
-    .highlight-wrap:hover .copy-btn,
-    .highlight-wrap .copy-btn:focus {
-      opacity: 1
-    }
-
-    .highlight-wrap {
-      position: relative;
-    }
-  </style>
-  <script>
-    $('.highlight').each(function (i, e) {
-      var $wrap = $('<div>').addClass('highlight-wrap');
-      $(e).after($wrap);
-      $wrap.append($('<button>').addClass('copy-btn').append('Copy').on('click', function (e) {
-        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
-          return $(e).text();
-        }).toArray().join('\n');
-        var ta = document.createElement('textarea');
-        var range = document.createRange(); //For Chrome
-        var sel = window.getSelection(); //For Chrome
-        var yPosition = window.pageYOffset || document.documentElement.scrollTop;
-        ta.style.top = yPosition + 'px'; //Prevent page scroll
-        ta.style.position = 'absolute';
-        ta.style.opacity = '0';
-        ta.value = code;
-        ta.textContent = code; //For FireFox
-        ta.contentEditable = true;
-        ta.readOnly = false;
-        document.body.appendChild(ta);
-        range.selectNode(ta);
-        sel.removeAllRanges();
-        sel.addRange(range);
-        ta.setSelectionRange(0, code.length);
-        var result = document.execCommand('copy');
-        
-        ta.blur(); //For iOS
-        $(this).blur();
-      })).on('mouseleave', function (e) {
-        var $b = $(this).find('.copy-btn');
-        setTimeout(function () {
-          $b.text('Copy');
-        }, 300);
-      }).append(e);
-    })
-  </script>
+<script>
+  $('.highlight').each(function(i, e) {
+    var $wrap = $('<div>').addClass('highlight-wrap');
+    $(e).after($wrap);
+    $wrap.append($('<button>').addClass('copy-btn').append('Copy').on('click', function(e) {
+      var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+        return $(e).text();
+      }).toArray().join('\n');
+      var ta = document.createElement('textarea');
+      var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+      ta.style.top = yPosition + 'px'; // Prevent page scroll
+      ta.style.position = 'absolute';
+      ta.style.opacity = '0';
+      ta.readOnly = true;
+      ta.value = code;
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, code.length);
+      ta.readOnly = false;
+      var result = document.execCommand('copy');
+      
+      ta.blur(); // For iOS
+      $(this).blur();
+    })).on('mouseleave', function(e) {
+      var $b = $(this).find('.copy-btn');
+      setTimeout(function() {
+        $b.text('Copy');
+      }, 300);
+    }).append(e);
+  })
+</script>
 
 
   
-  
 
   
-  
-
-  
-
 
 </body>
 </html>
