@@ -403,6 +403,9 @@ kbd {
   overflow: auto;
   -webkit-overflow-scrolling: touch;
 }
+.highlight .table-container {
+  margin: 0px;
+}
 table {
   width: 100%;
   border-collapse: collapse;
@@ -1781,11 +1784,10 @@ pre .javascript .function {
   z-index: 1050;
   cursor: pointer;
 }
-.sidebar-toggle:hover .sidebar-toggle-line {
-  background: #fc6423;
-}
 @media (max-width: 991px) {
   .sidebar-toggle {
+    opacity: 0.8;
+    right: 20px;
     display: none;
   }
 }
@@ -1849,7 +1851,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #fff;
+  background: #de87cc;
 }
 .feed-link,
 .chat {
