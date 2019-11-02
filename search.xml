@@ -37,7 +37,7 @@
             <p>Hello World!</p>
           </div>
 <h2 id="image">Image</h2>
-<img title="San Francisco" data-src="/en/posts/Hello-World/San-Francisco.png">
+<img class title="San Francisco" data-src="/en/posts/Hello-World/San-Francisco.png">
 <h2 id="pdf">PDF</h2>
 <div class="pdf" target="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" height></div>
 ]]></content>
