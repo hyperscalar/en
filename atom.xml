@@ -5,9 +5,9 @@
   <subtitle>Computer, Bicycle, and Music</subtitle>
   <link href="/en/atom.xml" rel="self"/>
   
-  <link href="https://cachecoherence.github.io/en/"/>
+  <link href="https://bitrhythm.github.io/en/"/>
   <updated>2018-09-09T16:00:00.000Z</updated>
-  <id>https://cachecoherence.github.io/en/</id>
+  <id>https://bitrhythm.github.io/en/</id>
   
   <author>
     <name>Twice-cooked Pork</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>Hello World</title>
-    <link href="https://cachecoherence.github.io/en/posts/Hello-World/"/>
-    <id>https://cachecoherence.github.io/en/posts/Hello-World/</id>
+    <link href="https://bitrhythm.github.io/en/posts/Hello-World/"/>
+    <id>https://bitrhythm.github.io/en/posts/Hello-World/</id>
     <published>2018-03-19T16:00:00.000Z</published>
     <updated>2018-09-09T16:00:00.000Z</updated>
     
@@ -33,10 +33,10 @@
     </summary>
     
     
-      <category term="Miscellaneous" scheme="https://cachecoherence.github.io/en/categories/Miscellaneous/"/>
+      <category term="Miscellaneous" scheme="https://bitrhythm.github.io/en/categories/Miscellaneous/"/>
     
     
-      <category term="Test" scheme="https://cachecoherence.github.io/en/tags/Test/"/>
+      <category term="Test" scheme="https://bitrhythm.github.io/en/tags/Test/"/>
     
   </entry>
   
