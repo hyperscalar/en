@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#E91E63">
-<meta name="generator" content="Hexo 4.2.1">
+<meta name="generator" content="Hexo 5.3.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/en/images/apple-touch-icon-lightbulb.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/en/images/favicon-32x32-lightbulb.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/en/images/favicon-16x16-lightbulb.png">
@@ -22,9 +22,9 @@
 
   <meta name="description" content="Stay hungry, Stay foolish.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Learn &amp; Explore">
+<meta property="og:title" content="Twice-cooked Blog">
 <meta property="og:url" content="https://arhythmetic.github.io/en/index.html">
-<meta property="og:site_name" content="Learn &amp; Explore">
+<meta property="og:site_name" content="Twice-cooked Blog">
 <meta property="og:description" content="Stay hungry, Stay foolish.">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="Twice-cooked Pork">
@@ -43,7 +43,7 @@
   };
 </script>
 
-  <title>Learn & Explore - Computer, Bicycle, and Music</title>
+  <title>Twice-cooked Blog - Learning & Exploration</title>
   
 
 
@@ -74,7 +74,7 @@
   </style>
 </noscript>
 
-<link rel="alternate" href="/en/atom.xml" title="Learn & Explore" type="application/atom+xml">
+<link rel="alternate" href="/en/atom.xml" title="Twice-cooked Blog" type="application/atom+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -95,10 +95,10 @@
 
     <a href="/en/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">Learn & Explore</h1>
+      <h1 class="site-title">Twice-cooked Blog</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
-      <p class="site-subtitle" itemprop="description">Computer, Bicycle, and Music</p>
+      <p class="site-subtitle" itemprop="description">Learning & Exploration</p>
   </div>
 
   <div class="site-nav-right">
@@ -216,7 +216,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Learn & Explore">
+      <meta itemprop="name" content="Twice-cooked Blog">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -270,7 +270,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>539</span>
+              <span>573</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -595,10 +595,60 @@ document.querySelectorAll('.pdfobject-container').forEach(element => {
 
   
       
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css">
-  <script src="//cdn.jsdelivr.net/npm/katex@0/dist/contrib/copy-tex.min.js"></script>
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@0/dist/contrib/copy-tex.min.css">
 
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
   <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Learn &amp; Explore</title>
+  <title>Twice-cooked Blog</title>
   
-  <subtitle>Computer, Bicycle, and Music</subtitle>
-  <link href="/en/atom.xml" rel="self"/>
+  <subtitle>Learning &amp; Exploration</subtitle>
+  <link href="https://arhythmetic.github.io/en/atom.xml" rel="self"/>
   
   <link href="https://arhythmetic.github.io/en/"/>
   <updated>2018-09-09T16:00:00.000Z</updated>
@@ -23,20 +23,18 @@
     <published>2018-03-19T16:00:00.000Z</published>
     <updated>2018-09-09T16:00:00.000Z</updated>
     
-    <summary type="html">
     
-      &lt;h1 id=&quot;Hello-World&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#Hello-World&quot;&gt;¶&lt;/a&gt;Hello World&lt;/h1&gt;
+    <summary type="html">&lt;h1 id=&quot;Hello-World&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#Hello-World&quot;&gt;¶&lt;/a&gt;Hello World&lt;/h1&gt;
 &lt;p&gt;This is my personal blog.&lt;/p&gt;
 &lt;p&gt;Mainly about technology learning and thinking, but not limited to this.&lt;/p&gt;
-&lt;p&gt;Insist on originality, Update aperiodically.&lt;/p&gt;
-    
-    </summary>
+&lt;p&gt;Insist on originality, Update aperiodically.&lt;/p&gt;</summary>
     
     
-      <category term="Miscellaneous" scheme="https://arhythmetic.github.io/en/categories/Miscellaneous/"/>
+    
+    <category term="Miscellaneous" scheme="https://arhythmetic.github.io/en/categories/Miscellaneous/"/>
     
     
-      <category term="Test" scheme="https://arhythmetic.github.io/en/tags/Test/"/>
+    <category term="Test" scheme="https://arhythmetic.github.io/en/tags/Test/"/>
     
   </entry>
   
