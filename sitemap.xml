@@ -2,52 +2,77 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://arhythmetic.github.io/en/about/index.html</loc>
+    <loc>https://hyperscalar.github.io/en/papers/index.html</loc>
     
-    <lastmod>2021-01-10T14:39:45.334Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://arhythmetic.github.io/en/books/index.html</loc>
-    
-    <lastmod>2021-01-10T14:39:45.334Z</lastmod>
+    <lastmod>2021-04-13</lastmod>
     
   </url>
   
   <url>
-    <loc>https://arhythmetic.github.io/en/categories/index.html</loc>
+    <loc>https://hyperscalar.github.io/en/tags/index.html</loc>
     
-    <lastmod>2021-01-10T14:39:45.334Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://arhythmetic.github.io/en/courses/index.html</loc>
-    
-    <lastmod>2021-01-10T14:39:45.334Z</lastmod>
+    <lastmod>2021-04-13</lastmod>
     
   </url>
   
   <url>
-    <loc>https://arhythmetic.github.io/en/papers/index.html</loc>
+    <loc>https://hyperscalar.github.io/en/about/index.html</loc>
     
-    <lastmod>2021-01-10T14:39:45.334Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://arhythmetic.github.io/en/tags/index.html</loc>
-    
-    <lastmod>2021-01-10T14:39:45.334Z</lastmod>
+    <lastmod>2021-04-13</lastmod>
     
   </url>
   
   <url>
-    <loc>https://arhythmetic.github.io/en/posts/Hello-World/</loc>
+    <loc>https://hyperscalar.github.io/en/books/index.html</loc>
     
-    <lastmod>2018-09-09T16:00:00.000Z</lastmod>
+    <lastmod>2021-04-13</lastmod>
     
+  </url>
+  
+  <url>
+    <loc>https://hyperscalar.github.io/en/categories/index.html</loc>
+    
+    <lastmod>2021-04-13</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hyperscalar.github.io/en/courses/index.html</loc>
+    
+    <lastmod>2021-04-13</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hyperscalar.github.io/en/posts/Hello-World/</loc>
+    
+    <lastmod>2018-09-09</lastmod>
+    
+  </url>
+  
+
+  <url>
+    <loc>https://hyperscalar.github.io/en</loc>
+    <lastmod>2021-04-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  
+  <url>
+    <loc>https://hyperscalar.github.io/en/tags/Test/</loc>
+    <lastmod>2021-04-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+
+  
+  <url>
+    <loc>https://hyperscalar.github.io/en/categories/Miscellaneous/</loc>
+    <lastmod>2021-04-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
   </url>
   
 </urlset>
