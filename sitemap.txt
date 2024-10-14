@@ -1,9 +1,9 @@
+https://hyperscalar.github.io/en/books/index.html
+https://hyperscalar.github.io/en/about/index.html
 https://hyperscalar.github.io/en/categories/index.html
 https://hyperscalar.github.io/en/courses/index.html
-https://hyperscalar.github.io/en/papers/index.html
 https://hyperscalar.github.io/en/tags/index.html
-https://hyperscalar.github.io/en/about/index.html
-https://hyperscalar.github.io/en/books/index.html
+https://hyperscalar.github.io/en/papers/index.html
 https://hyperscalar.github.io/en/posts/Hello-World/
 https://hyperscalar.github.io/en
 https://hyperscalar.github.io/en/tags/Test/
