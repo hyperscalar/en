@@ -38,7 +38,7 @@
   </url>
   
   <url>
-    <loc>https://hyperscalar.github.io/en/courses/</loc>
+    <loc>https://hyperscalar.github.io/en/categories/</loc>
     
     <lastmod>2024-11-03</lastmod>
     
@@ -47,7 +47,7 @@
   </url>
   
   <url>
-    <loc>https://hyperscalar.github.io/en/categories/</loc>
+    <loc>https://hyperscalar.github.io/en/courses/</loc>
     
     <lastmod>2024-11-03</lastmod>
     
@@ -66,7 +66,7 @@
   
 
   <url>
-    <loc>https://hyperscalar.github.io/en</loc>
+    <loc>https://hyperscalar.github.io/en/</loc>
     <lastmod>2024-11-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
