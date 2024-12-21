@@ -390,7 +390,7 @@ Querying the state data for a specific vertex in a DAG for a user triggers loadi
       <tags>
         <tag>Performance Engineering</tag>
         <tag>Computer Architecture</tag>
-        <tag>Distributed System</tag>
+        <tag>Distributed Systems</tag>
         <tag>Practical Experience</tag>
       </tags>
   </entry>
@@ -414,6 +414,11 @@ Querying the state data for a specific vertex in a DAG for a user triggers loadi
     <content><![CDATA[]]></content>
   </entry>
   <entry>
+    <title>Categories</title>
+    <url>/en/categories/index.html</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
     <title>Courses</title>
     <url>/en/courses/index.html</url>
     <content><![CDATA[]]></content>
@@ -421,11 +426,6 @@ Querying the state data for a specific vertex in a DAG for a user triggers loadi
   <entry>
     <title>Papers</title>
     <url>/en/papers/index.html</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>Categories</title>
-    <url>/en/categories/index.html</url>
     <content><![CDATA[]]></content>
   </entry>
   <entry>
