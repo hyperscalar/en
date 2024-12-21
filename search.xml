@@ -42,7 +42,7 @@ C --&gt;|Two| E[Result 2]</code></pre>
       </tags>
   </entry>
   <entry>
-    <title>How to Reduce Database Query Load From 717,000 Queries/Second to 14,000 Queries/Second Using Only Local Cache</title>
+    <title>How to Reduce Database Query Load from 717,000 Queries/Second to 14,000 Queries/Second Using Only Local Cache</title>
     <url>/en/posts/Locality-of-Reference-and-Cache/</url>
     <content><![CDATA[<blockquote>
 <p>Original Title: Significantly Reducing Database Query Load Using the Spatial Locality of Reference</p>
@@ -414,11 +414,6 @@ Querying the state data for a specific vertex in a DAG for a user triggers loadi
     <content><![CDATA[]]></content>
   </entry>
   <entry>
-    <title>Categories</title>
-    <url>/en/categories/index.html</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
     <title>Courses</title>
     <url>/en/courses/index.html</url>
     <content><![CDATA[]]></content>
@@ -426,6 +421,11 @@ Querying the state data for a specific vertex in a DAG for a user triggers loadi
   <entry>
     <title>Papers</title>
     <url>/en/papers/index.html</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>Categories</title>
+    <url>/en/categories/index.html</url>
     <content><![CDATA[]]></content>
   </entry>
   <entry>
