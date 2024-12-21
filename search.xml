@@ -42,6 +42,359 @@ C --&gt;|Two| E[Result 2]</code></pre>
       </tags>
   </entry>
   <entry>
+    <title>How to Reduce Database Query Load From 717,000 Queries/Second to 14,000 Queries/Second Using Only Local Cache</title>
+    <url>/en/posts/Locality-of-Reference-and-Cache/</url>
+    <content><![CDATA[<blockquote>
+<p>Original Title: Significantly Reducing Database Query Load Using the Spatial Locality of Reference</p>
+</blockquote>
+<h2 id="Locality-of-Reference"><a class="header-anchor" href="#Locality-of-Reference">¶</a>Locality of Reference</h2>
+<p>The locality of reference in programs refers to the tendency of a program to execute a small, localized portion of its code at any given time. Similarly, the memory accessed during execution is limited to a small region of the computer’s memory.</p>
+<p>The locality of reference can be divided into:</p>
+<ul>
+<li><strong>Temporal Locality</strong>: Refers to the likelihood that recently accessed data or instructions will be accessed again soon. For example, function parameters or local variables used in a function are likely to be reused shortly.</li>
+<li><strong>Spatial Locality</strong>: Refers to the tendency that once a particular memory location is accessed, nearby memory locations will be accessed soon after. This is common in loops; for example, if the third element in an array is accessed, the fourth element is likely to be accessed in the next iteration.</li>
+</ul>
+<span id="more"></span>
+<h2 id="Caching"><a class="header-anchor" href="#Caching">¶</a>Caching</h2>
+<p>Due to the locality of reference, placing frequently accessed data in faster storage can significantly improve program execution efficiency. This is the essence of caching. Caching works by trading space for time—sacrificing the real-time freshness of data in favor of keeping locally cached historical data to reduce the overhead of heavy operations, such as accessing memory, network I/O, etc., thus improving performance.</p>
+<h2 id="Cache-Friendliness"><a class="header-anchor" href="#Cache-Friendliness">¶</a>Cache Friendliness</h2>
+<p>Since the effectiveness of caching relies on the program’s locality of reference, determining whether a program is cache-friendly involves measuring its locality of reference strength.</p>
+<p>A classic example of cache-friendliness is heapsort, which has a theoretically optimal worst-case time complexity of  <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="9.052ex" height="2.262ex" role="img" focusable="false" viewBox="0 -750 4001 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"></path></g><g data-mml-node="mo" transform="translate(763,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mi" transform="translate(1152,0)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mi" transform="translate(1752,0)"><path data-c="1D459" d="M117 59Q117 26 142 26Q179 26 205 131Q211 151 215 152Q217 153 225 153H229Q238 153 241 153T246 151T248 144Q247 138 245 128T234 90T214 43T183 6T137 -11Q101 -11 70 11T38 85Q38 97 39 102L104 360Q167 615 167 623Q167 626 166 628T162 632T157 634T149 635T141 636T132 637T122 637Q112 637 109 637T101 638T95 641T94 647Q94 649 96 661Q101 680 107 682T179 688Q194 689 213 690T243 693T254 694Q266 694 266 686Q266 675 193 386T118 83Q118 81 118 75T117 65V59Z"></path></g><g data-mml-node="mi" transform="translate(2050,0)"><path data-c="1D45C" d="M201 -11Q126 -11 80 38T34 156Q34 221 64 279T146 380Q222 441 301 441Q333 441 341 440Q354 437 367 433T402 417T438 387T464 338T476 268Q476 161 390 75T201 -11ZM121 120Q121 70 147 48T206 26Q250 26 289 58T351 142Q360 163 374 216T388 308Q388 352 370 375Q346 405 306 405Q243 405 195 347Q158 303 140 230T121 120Z"></path></g><g data-mml-node="mi" transform="translate(2535,0)"><path data-c="1D454" d="M311 43Q296 30 267 15T206 0Q143 0 105 45T66 160Q66 265 143 353T314 442Q361 442 401 394L404 398Q406 401 409 404T418 412T431 419T447 422Q461 422 470 413T480 394Q480 379 423 152T363 -80Q345 -134 286 -169T151 -205Q10 -205 10 -137Q10 -111 28 -91T74 -71Q89 -71 102 -80T116 -111Q116 -121 114 -130T107 -144T99 -154T92 -162L90 -164H91Q101 -167 151 -167Q189 -167 211 -155Q234 -144 254 -122T282 -75Q288 -56 298 -13Q311 35 311 43ZM384 328L380 339Q377 350 375 354T369 368T359 382T346 393T328 402T306 405Q262 405 221 352Q191 313 171 233T151 117Q151 38 213 38Q269 38 323 108L331 118L384 328Z"></path></g><g data-mml-node="mi" transform="translate(3012,0)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(3612,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g></g></g></svg></mjx-container>, but in practice, it usually performs worse than quicksort, which has a worst-case time complexity of <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="5.832ex" height="2.452ex" role="img" focusable="false" viewBox="0 -833.9 2577.6 1083.9"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"></path></g><g data-mml-node="mo" transform="translate(763,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="msup" transform="translate(1152,0)"><g data-mml-node="mi"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mn" transform="translate(633,363) scale(0.707)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g></g><g data-mml-node="mo" transform="translate(2188.6,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g></g></g></svg></mjx-container>. This is because heapsort has poor spatial locality of memory access, leading to bad cache-friendliness.</p>
+<p>Quicksort</p>
+<img data-src="/en/posts/Locality-of-Reference-and-Cache/Quicksort-Animation.gif" class="" title="Quicksort Animation, From Wikipedia">
+<p>Quicksort’s divide-and-conquer algorithm limits memory access to a localized range, resulting in better spatial locality.</p>
+<p>Heapsort</p>
+<img data-src="/en/posts/Locality-of-Reference-and-Cache/Heapsort-Animation.gif" class="" title="Heapsort Animation, From Wikipedia">
+<p>Heapsort, on the other hand, has a “jumping” memory access pattern, leading to poorer spatial locality.</p>
+<h2 id="Leveraging-Locality-of-Reference-in-Distributed-Systems"><a class="header-anchor" href="#Leveraging-Locality-of-Reference-in-Distributed-Systems">¶</a>Leveraging Locality of Reference in Distributed Systems</h2>
+<h3 id="Storage-Hierarchy-in-Distributed-Systems"><a class="header-anchor" href="#Storage-Hierarchy-in-Distributed-Systems">¶</a>Storage Hierarchy in Distributed Systems</h3>
+<img data-src="/en/posts/Locality-of-Reference-and-Cache/Memory-Hierarchy.svg" class="" title="Storage Hierarchy in Distributed Systems">
+<h3 id="Utilizing-Temporal-Locality-in-Distributed-Systems"><a class="header-anchor" href="#Utilizing-Temporal-Locality-in-Distributed-Systems">¶</a>Utilizing Temporal Locality in Distributed Systems</h3>
+<p>Before exploring how to leverage temporal locality in distributed systems, let’s first consider how it is utilized in a single-machine computer architecture.</p>
+<p>For example, the Apple M1 processor features an extensive multi-level on-chip cache:</p>
+<table>
+    <tr>
+        <th></th>
+        <th>Low Power Core (Icestorm)</th>
+        <th>High Performance Core (Firestorm)</th>
+    </tr>
+    <tr>
+        <th>L1 Instruction</th>
+        <td>128 KB x 4</td>
+        <td>192 KB x 4</td>
+    </tr>
+    <tr>
+        <th>L1 Data</th>
+        <td>64 KB x 4</td>
+        <td>128 KB x 4</td>
+    </tr>
+    <tr>
+        <th>L2</th>
+        <td>4 MB (shared among low-power cores)</td>
+        <td>12 MB (shared among high-performance cores)</td>
+    </tr>
+    <tr>
+        <th>SLC</th>
+        <td colspan="2" align="center">8MB (shared across the entire chip)</td>
+    </tr>
+</table>
+<p>Key characteristics:</p>
+<ol>
+<li><strong>Separation of Instructions and Data</strong>: In L1 cache, instructions and data are kept separate to avoid filling up the cache with data, ensuring high cache hit rates for instructions.</li>
+<li><strong>Multi-level Caching</strong>: From L1 to L2 and then to SLC, the speed decreases, and the capacity increases. Stronger locality increases the likelihood of cache hits at the faster levels.</li>
+<li><strong>Exclusive and Shared Caching</strong>: L1 is exclusive per core, L2 is shared within a core cluster, and SLC is shared across the entire chip (including CPU, GPU, NPU, etc.).</li>
+</ol>
+<p>Let us explore how to apply the above strategies to distributed system clusters:</p>
+<ol>
+<li><strong>Separation of code instructions and program data</strong>: Separate configuration data caches, user data caches, and even caches for different scenarios or purposes as much as possible.</li>
+<li><strong>Multi-level caching strategy</strong>: Employ a hierarchical caching approach, incorporating both single-machine caches and distributed caches.</li>
+<li><strong>Combination of exclusivity and sharing</strong>: Use exclusive local caches on single machines and shared distributed caches across clusters.</li>
+</ol>
+<p>By effectively employing these caching strategies, we can maximize the exploitation of temporal locality in programs while balancing the differences among caches in terms of speed, capacity, and cost.</p>
+<h3 id="Utilizing-Spatial-Locality-in-Distributed-Systems"><a class="header-anchor" href="#Utilizing-Spatial-Locality-in-Distributed-Systems">¶</a>Utilizing Spatial Locality in Distributed Systems</h3>
+<p>Before delving into how to leverage spatial locality in distributed systems, let’s first understand how spatial locality is utilized at the level of single-machine computer architecture.</p>
+<p>As is well known, the smallest unit of addressing in memory (RAM) is a byte. This means that a byte is the atomic unit of memory and cannot be subdivided further. This is also why a boolean type, which only contains a single bit of information, is typically stored in memory as one byte.</p>
+<p>Now, are the L1, L2, and other CPU caches also atomic units of bytes?</p>
+<p>The answer is both yes and no:</p>
+<ul>
+<li><strong>Yes</strong>: Because caches are generally transparent to the instruction set, they must adhere to the same byte-addressability as memory. For cache access, the atomic unit is the byte, consistent with memory.</li>
+<li><strong>No</strong>: When it comes to cache loading, the atomic unit is not a byte but a cache line. For example, as mentioned earlier, the M1 processor has a cache line size of 128 bytes. This means that if a cache miss occurs and data needs to be loaded from memory into the cache, the entire cache line—128 bytes—is loaded, even if the requested data is only a single byte.</li>
+</ul>
+<p>So, why doesn’t the cache just load the required data instead of the entire cache line? Doesn’t this lead to waste?</p>
+<p>The reasons for this design are roughly as follows:</p>
+<ul>
+<li>The design of cache lines takes full advantage of modern DRAM’s burst mode, significantly improving memory throughput and reducing latency. We won’t go into further detail here.</li>
+<li>A certain amount of waste is acceptable as long as it improves the overall performance of the system. For instance, CPU branch prediction works on a similar principle.</li>
+<li>The degree of waste actually depends on the program’s spatial locality. The more pronounced the spatial locality, the smaller the waste.</li>
+<li>In theory, the larger the cache line, the more performance improvement can be seen in programs with strong spatial locality. Of course, the cache line size is also constrained by various physical factors; it cannot be arbitrarily large, and larger is not necessarily better.</li>
+</ul>
+<p>As we can see, the design of cache lines is largely aimed at exploiting spatial locality in programs to improve performance. In other words, this design encourages spatial locality: programs with strong spatial locality will benefit from improved performance under this mechanism, while programs with weak spatial locality will suffer performance penalties, much like how quicksort and heapsort were discussed earlier.</p>
+<p>Therefore, the key to utilizing spatial locality is: when loading cache data, we should not only load the data currently needed, but also load some “adjacent” data as well. In other words, the granularity of cache data loading should be greater than the granularity of cache data querying.</p>
+<p>However, when trying to apply this concept in distributed systems, we face two major challenges:</p>
+<ul>
+<li><strong>How to define “adjacency”</strong>: In memory, adjacency is easily defined as physically contiguous addresses. But for data in databases, the situation is much more complex. Even within the same table, the definition of “adjacency” may vary depending on the usage scenario.</li>
+<li><strong>How to determine the minimum data unit for cache loading</strong>: Similar to the cache line size in CPU caches. If this value is too small, it limits the utilization of spatial locality. If it is too large, it puts considerable pressure on cache loading overhead and space utilization.</li>
+</ul>
+<p>There is no universal answer to these two problems; they need to be balanced based on the specific context. Below, I will illustrate this with a real-world example.</p>
+<h2 id="Practical-Case-Study"><a class="header-anchor" href="#Practical-Case-Study">¶</a>Practical Case Study</h2>
+<h3 id="Background-and-Challenges"><a class="header-anchor" href="#Background-and-Challenges">¶</a>Background and Challenges</h3>
+<p>The project I am responsible for is a no-code development platform aimed at the consumer operations. It uses directed acyclic graphs (DAGs) to model various operational strategies within the consumer operations domain, helping operations teams directly implement systematic and refined operational measures. This platform is referred to as the "Strategy Platform.”</p>
+<p>In addition to utilizing the complex DAG model, another key feature of the Strategy Platform is the stateful nature of its models. Specifically, the platform records the state information of each user, such as the vertex they occupy in each directed acyclic graph. This statefulness enhances the model’s expressiveness, enabling it to support a wide range of more complex real-world business scenarios.</p>
+<p>However, there is no such thing as a free lunch. Storing, writing, and querying these user state data present several challenges:</p>
+<ul>
+<li>The volume of data to be stored is enormous, with an estimated scale of over 1 billion records. This will continue to grow as the platform’s usage and business scale increase.</li>
+<li>The volume of data to be written is similarly vast, with an estimated write throughput (TPS) exceeding 10,000. This will also increase with the platform’s usage and business scale.</li>
+<li>The volume of data to be queried is even larger, with an estimated query throughput (QPS) exceeding 100,000. This will continue to grow with the platform’s usage and business scale</li>
+</ul>
+<h3 id="Mitigation-Measures"><a class="header-anchor" href="#Mitigation-Measures">¶</a>Mitigation Measures</h3>
+<h4 id="Addressing-the-Issue-of-Large-Data-Volumes"><a class="header-anchor" href="#Addressing-the-Issue-of-Large-Data-Volumes">¶</a>Addressing the Issue of Large Data Volumes</h4>
+<ul>
+<li>During the database selection phase, Lindorm (a modified version of HBase by Alibaba Cloud) was chosen to support massive data volumes. Additionally, its table-level and row-level TTL (Time to Live) mechanisms allow for easy automatic cleanup of historical data.</li>
+<li>To reduce costs, a shared cluster was selected, which charges based on actual storage, write, and query usage. However, shared clusters can face “noisy neighbor” issues, which may lead to occasional performance fluctuations. Therefore, fault tolerance measures are necessary.</li>
+</ul>
+<h4 id="Addressing-the-Issue-of-High-Write-Volumes"><a class="header-anchor" href="#Addressing-the-Issue-of-High-Write-Volumes">¶</a>Addressing the Issue of High Write Volumes</h4>
+<ul>
+<li>Lindorm (HBase) is based on the LSM Tree data structure, and all write operations are sequential. Whether using SSDs or HDDs, sequential writes are several times faster than random writes, thus offering significant write performance.</li>
+<li>State data is written in batches after undergoing some merging. This reduces the Write Transactions Per Second (TPS) and increases throughput.</li>
+<li>State data pruning: Before writing, the state data is filtered to retain only the states of vertices in the directed acyclic graph (DAG) that are relied upon by other vertices, rather than storing the state of all vertices involved in the execution. This approach has been proven to significantly reduce the data volume for storage, writing, and querying.</li>
+<li>To address occasional performance fluctuations in the shared cluster, fault tolerance during database writes is achieved by retrying through message queue. Additionally, the timestamp-based multi-version feature in Lindorm is used to handle data consistency issues that may arise from retry-induced write reordering.</li>
+</ul>
+<h4 id="The-Biggest-Challenge-High-Query-Volumes"><a class="header-anchor" href="#The-Biggest-Challenge-High-Query-Volumes">¶</a>The Biggest Challenge: High Query Volumes</h4>
+<p>The most significant challenge, without a doubt, is handling a large volume of query requests. Relying solely on common caching strategies that focus on temporal locality of reference is not very effective for this problem, for the following reasons:</p>
+<ul>
+<li>In the processing of a single request, repeatedly accessing the same vertex state is rare, so the cache hit rate is expected to be low.</li>
+<li>Introducing a multi-level cache strategy would only distribute part of the query load to stores like Redis, leading to additional costs and increased system dependencies, which may cause a drop in SLA (Service Level Agreement).</li>
+</ul>
+<p>As a result, a different approach must be taken, focusing on two ideas:</p>
+<ol>
+<li>During data writes, we adopt a batching strategy to combine multiple individual write requests into a single batch to reduce TPS and improve throughput. What corresponding strategy can be applied during query processing?</li>
+<li>Queries are usually user-specific, meaning each request typically involves multiple DAG executions, and each DAG execution involves several vertices. This creates a clear amplification effect: the query load for the state database = request volume × average number of DAGs per request × average number of vertices per DAG.</li>
+</ol>
+<blockquote>
+<p>If Idea 1 goes off course, it could result in a strategy where a single data query request is first blocked, waiting to accumulate a certain number of requests or until a specific time threshold is reached before issuing a batch query. While this could indeed achieve batching, it will undoubtedly increase request latency deterministically, and it’s uncertain how many requests can be accumulated, meaning the cost is guaranteed but the effectiveness is not assured. Additionally, requests aggregated in this way are usually for different users, meaning that their physical distribution in the database will be relatively dispersed. Whether batching these requests for a query improves or harms the query performance is uncertain… at least the indexing overhead probably won’t be significantly reduced compared to querying a batch of adjacent data.</p>
+</blockquote>
+<p>Ultimately, both approaches lead to the same conclusion: <strong>the granularity of cache data loading should be greater than the granularity of cache data querying</strong>. This mirrors the concept of cache line design in CPU caches, aiming to exploit the spatial locality of state data query requests.</p>
+<h5 id="State-Table-Key-Structure-and-Caching-Strategy"><a class="header-anchor" href="#State-Table-Key-Structure-and-Caching-Strategy">¶</a>State Table Key Structure and Caching Strategy</h5>
+<p>In the Lindorm database, the primary key for the state table (equivalent to the Rowkey in HBase) is composed of: (userId, graphId, vertexId). Additionally, like HBase, Lindorm supports range queries with leftmost prefix matching.</p>
+<p>To implement the idea that “the granularity of cache data loading should be greater than the granularity of cache data querying,” there are two choices:</p>
+<ol>
+<li><strong>Cache Loading Granularity: (userId, graphId)</strong>
+Querying the state data for a specific vertex in a DAG for a user triggers loading all state data for that user’s vertices in the same DAG into the cache.</li>
+<li><strong>Cache Loading Granularity: (userId)</strong>
+Querying the state data for a specific vertex in a DAG for a user triggers loading all state data for that user’s vertices across all DAGs into the cache.</li>
+</ol>
+<p>The cache query granularity depends on the use case, but the (userId, graphId, vertexId) key structure must remain unchanged.</p>
+<p>Here’s a comparison of the various cache loading strategies:</p>
+<table>
+<thead>
+<tr>
+<th>Cache Loading Granularity</th>
+<th>Number of Data Rows Loaded</th>
+<th>Data Volume Loaded</th>
+<th>Load Latency</th>
+<th>Spatial Locality</th>
+<th>Storage Pressure</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>(userId, graphId, vertexId)</td>
+<td>One row</td>
+<td>Small</td>
+<td>Low</td>
+<td>None</td>
+<td>Low</td>
+</tr>
+<tr>
+<td>(userId, graphId)</td>
+<td>Multiple adjacent rows</td>
+<td>Medium</td>
+<td>Medium</td>
+<td>Medium</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td>(userId)</td>
+<td>Multiple adjacent rows</td>
+<td>Large</td>
+<td>High</td>
+<td>High</td>
+<td>High</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Exploring-Spatial-Locality"><a class="header-anchor" href="#Exploring-Spatial-Locality">¶</a>Exploring Spatial Locality</h3>
+<p>During the development phase, it was anticipated that user state queries would become the largest performance bottleneck in the system. As a result, when the platform first went live, the cache loading granularity was directly configured at the level of (userId, graphId) in order to exploit some degree of spatial locality, while avoiding excessive waste and memory pressure. Of course, we could still estimate the query volume the database would face at the (userId, graphId, vertexId) granularity or even without caching, by monitoring the raw query volume for the cache.</p>
+<p>After the (userId, graphId) scheme was launched, the following metrics were observed:</p>
+<table>
+<thead>
+<tr>
+<th>Cache Loading Granularity</th>
+<th>Cache Query Volume</th>
+<th>Cache Load Volume</th>
+<th>Cache Load Time per Request</th>
+<th>Amortized Cache Query Time*</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>(userId, graphId, vertexId)</td>
+<td>68,000/sec</td>
+<td>68,000/sec</td>
+<td>1 ms/request</td>
+<td>1 ms/request</td>
+</tr>
+<tr>
+<td>(userId, graphId)</td>
+<td>68,000/sec</td>
+<td>16,000/sec</td>
+<td>1.5 ms/request</td>
+<td>0.35 ms/request</td>
+</tr>
+</tbody>
+</table>
+<p><em>Amortized Cache Query Time</em>: This refers to distributing the total cache load time across the total cache query volume. In other words: Cache Load Time per Request × Cache Load Volume ÷ Cache Query Volume.</p>
+<p>From this, we can observe the following from exploiting spatial locality:</p>
+<ul>
+<li>The cache load volume, which corresponds to the database query volume, was reduced to just 23.5% of its original size.</li>
+<li>However, because the amount of data loaded per request increased, the time per load request grew to 150% of the original value, though it remained within an excellent absolute range.</li>
+<li>Furthermore, when we distribute the total load time across the total query volume (averaging the times), the amortized query time dropped to just 35% of the original value. In other words, the overall overhead for querying user state data was reduced by as much as 65%.</li>
+</ul>
+<h3 id="Pushing-to-the-Extreme"><a class="header-anchor" href="#Pushing-to-the-Extreme">¶</a>Pushing to the Extreme</h3>
+<p>After the (userId, graphId) scheme had been running for some time, we observed that the memory pressure and data volumes were much lower than expected and well within acceptable levels.</p>
+<p>Thus, we decided to push the scheme to its limit—by setting the cache loading granularity to (userId)!</p>
+<table>
+<thead>
+<tr>
+<th>Cache Loading Granularity</th>
+<th>Cache Query Volume</th>
+<th>Cache Load Volume</th>
+<th>Cache Load Time per Request</th>
+<th>Amortized Cache Query Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>(userId, graphId, vertexId)</td>
+<td>68,000/sec</td>
+<td>68,000/sec</td>
+<td>1 ms/request</td>
+<td>1 ms/request</td>
+</tr>
+<tr>
+<td>(userId, graphId)</td>
+<td>68,000/sec</td>
+<td>16,000/sec</td>
+<td>1.5 ms/request</td>
+<td>0.35 ms/request</td>
+</tr>
+<tr>
+<td>(userId)</td>
+<td>68,000/sec</td>
+<td>2,800/sec</td>
+<td>3.9 ms/request</td>
+<td>0.16 ms/request</td>
+</tr>
+</tbody>
+</table>
+<p>As we pushed spatial locality to its extreme, the following observations were made:</p>
+<ul>
+<li>The cache load volume, or database query volume, was reduced to just 4.12% of the original query volume!</li>
+<li>Due to the larger amount of data loaded per request, the load time per request increased to nearly four times the original, but the absolute value was still within an acceptable range.</li>
+<li>The averaged query time dropped to just 16% of the original value. In other words, the overall overhead for querying user state data was reduced by 84%.</li>
+</ul>
+<h3 id="Long-Term-Performance"><a class="header-anchor" href="#Long-Term-Performance">¶</a>Long-Term Performance</h3>
+<p>After a longer period of platform development, the query volume for state cache queries increased significantly. At the same time, thanks to optimizations such as data pruning on the write side, the latest metrics are as follows:</p>
+<table>
+<thead>
+<tr>
+<th>Time Point</th>
+<th>Cache Loading Granularity</th>
+<th>Cache Query Volume</th>
+<th>Cache Load Volume</th>
+<th>Cache Load Time per Request</th>
+<th>Amortized Cache Query Time*</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Launch</td>
+<td>(userId)</td>
+<td>68,000/sec</td>
+<td>2,800/sec</td>
+<td>3.9 ms/request</td>
+<td>0.16 ms/request</td>
+</tr>
+<tr>
+<td>Current</td>
+<td>(userId)</td>
+<td>717,000/sec</td>
+<td>14,000/sec</td>
+<td>1.17 ms/request</td>
+<td>0.02 ms/request</td>
+</tr>
+</tbody>
+</table>
+<p>From the latest data, we can observe the following:</p>
+<ul>
+<li>The cache load volume, or database query volume, is now only 1.95% of the query volume!</li>
+<li>The cache hit rate has remained stable at around 97.95%.</li>
+<li>The load time per cache request has decreased to 1.17 ms/request! This reduction is mainly attributed to optimizations on the write side, such as data pruning, which reduced the overall data volume in the database. Consequently, less data needs to be loaded, resulting in a significant reduction in load time.</li>
+<li>The averaged query time has dropped dramatically to just 0.02 ms/request. In other words, the overall overhead for querying user state data has decreased by as much as 98%!</li>
+</ul>
+<p>After the substantial increase in query volume, combined with optimizations on the write side, the (userId) scheme has demonstrated even greater potential, thanks to its extensive exploitation of spatial locality.</p>
+<h3 id="Risks"><a class="header-anchor" href="#Risks">¶</a>Risks</h3>
+<p>At this point, you may be wondering: what are the trade-offs?</p>
+<ul>
+<li>Could such an aggressive cache loading strategy cause the memory to overflow?</li>
+<li>Is there a risk of having massive data under a single user ID?</li>
+<li>How is the GC (Garbage Collection) pressure?</li>
+<li>Will the memory requirements be excessively high?</li>
+</ul>
+<p>These concerns are indeed valid, and to address them, we have implemented detailed and comprehensive monitoring based on custom Prometheus metrics and our internal monitoring system:</p>
+<ul>
+<li>Local cache usage, query hit rate, query volume, load volume, average load time, load failure rate, eviction volume, etc.;</li>
+<li>Batch write and batch read sizes of the state database tables, used to monitor risks such as excessive data volume under a single user;</li>
+<li>JVM GC performance on every single machine, including: GC frequency per minute, cumulative GC time per minute, heap memory usage, etc.</li>
+</ul>
+<p>It is important to note:</p>
+<ul>
+<li>The state cache is only valid for 1 second after loading;</li>
+<li>All individual machines are x86 containers with 4 CPU cores and 8 GiB RAM.</li>
+</ul>
+<p>From the monitoring metrics, we can observe:</p>
+<ul>
+<li>The peak utilization of the state cache on a single machine is around 600 items, which is not large and is well below the maximum of 2048 items;</li>
+<li>From the batch query monitoring of the state database table, we can observe that the maximum batch query data volume is around 12 items per batch, and it remains stable over time without any significant spikes. Additionally, considering the scenario on the strategy platform, it is highly unlikely that a single user would have an excessively large amount of data;</li>
+<li>JVM GC performance on a single machine, using JDK 21 and G1 GC, shows a GC frequency of 2-5 times per minute, with a cumulative GC time of 40-130 milliseconds per minute (not per GC cycle), all of which are Young GC events;</li>
+<li>On a single machine with 4 GiB heap memory, after Young GC, the heap usage can drop to below 1 GiB.</li>
+</ul>
+<p>In summary, all the metrics are at a very healthy level.</p>
+<h3 id="Review"><a class="header-anchor" href="#Review">¶</a>Review</h3>
+<p>In the previous sections, it was mentioned that applying a cache strategy that can exploit spatial locality — specifically, a strategy where the granularity of cache data loading is greater than the granularity of cache data querying — to distributed systems presents two major challenges:</p>
+<ol>
+<li>How to define “adjacency”?</li>
+<li>How to determine the granularity of data loaded into the cache, i.e., the “cache line size”?</li>
+</ol>
+<p>So, how are these two challenges addressed in the case described above?</p>
+<ul>
+<li><strong>Defining “adjacency”</strong>: In this case, whether cache loading is done based on the granularity of (userId, graphId) or (userId), it still adheres to the principle of leftmost prefix matching of the database primary key (Rowkey). This means that, on the physical layer, these data items are stored adjacently, which allows for better utilization of the database and underlying hardware characteristics during queries. This reduces index overhead and takes advantage of sequential reads, thus optimizing performance overhead during batch queries and achieving the effect where 1 + 1 &lt; 2.</li>
+<li><strong>Granularity of cache loading</strong>: Unlike cache lines in CPUs, which face strict physical limitations like transistor count, the constraints in distributed systems are usually much more relaxed. For example, memory size is a much less restrictive factor. Therefore, in this case, we are able to use variable-length granularities, such as (userId, graphId) or even (userId), for cache loading. This allows us to fully exploit spatial locality, which would be difficult to achieve in scenarios with strict physical limitations like those in CPUs.</li>
+</ul>
+<p>Of course, this specific case has some unique features. Overall, the distribution of state data is relatively sparse, especially for the pruned state data. In more typical scenarios, we still recommend setting a hard limit on the amount of data to be loaded into the cache. For example, when loading in batches, a maximum of N rows should be loaded. While this may not fully exploit spatial locality to its maximum, it effectively controls memory pressure and is suitable for a broader range of scenarios, such as when the amount of data under a single user exceeds the memory limits. This approach is more akin to the cache line strategy in CPUs.</p>
+<p>Additionally, when loading data into the cache, a placeholder empty object must be set for values that do not exist in the database to prevent cache penetration. This anti-penetration effect is also enhanced as the granularity of cache loading increases.</p>
+]]></content>
+      <categories>
+        <category>Caching</category>
+      </categories>
+      <tags>
+        <tag>Performance Engineering</tag>
+        <tag>Computer Architecture</tag>
+        <tag>Distributed System</tag>
+        <tag>Practical Experience</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>About</title>
     <url>/en/about/index.html</url>
     <content><![CDATA[<center>Love Computer</center>
