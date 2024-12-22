@@ -129,7 +129,7 @@ C --&gt;|Two| E[Result 2]</code></pre>
 <li>In theory, the larger the cache line, the more performance improvement can be seen in programs with strong spatial locality. Of course, the cache line size is also constrained by various physical factors; it cannot be arbitrarily large, and larger is not necessarily better.</li>
 </ul>
 <p>As we can see, the design of cache lines is largely aimed at exploiting spatial locality in programs to improve performance. In other words, this design encourages spatial locality: programs with strong spatial locality will benefit from improved performance under this mechanism, while programs with weak spatial locality will suffer performance penalties, much like how quicksort and heapsort were discussed earlier.</p>
-<p>Therefore, the key to utilizing spatial locality is: when loading cache data, we should not only load the data currently needed, but also load some “adjacent” data as well. In other words, the granularity of cache data loading should be greater than the granularity of cache data querying.</p>
+<p>Therefore, the key to utilizing spatial locality is: when loading cache data, we should not only load the data currently needed, but also load some “adjacent” data as well. In other words, <strong>the granularity of cache data loading should be greater than the granularity of cache data querying</strong>.</p>
 <p>However, when trying to apply this concept in distributed systems, we face two major challenges:</p>
 <ul>
 <li><strong>How to define “adjacency”</strong>: In memory, adjacency is easily defined as physically contiguous addresses. But for data in databases, the situation is much more complex. Even within the same table, the definition of “adjacency” may vary depending on the usage scenario.</li>
@@ -139,7 +139,7 @@ C --&gt;|Two| E[Result 2]</code></pre>
 <h2 id="Practical-Case-Study"><a class="header-anchor" href="#Practical-Case-Study">¶</a>Practical Case Study</h2>
 <h3 id="Background-and-Challenges"><a class="header-anchor" href="#Background-and-Challenges">¶</a>Background and Challenges</h3>
 <p>The project I am responsible for is a no-code development platform aimed at the consumer operations. It uses directed acyclic graphs (DAGs) to model various operational strategies within the consumer operations domain, helping operations teams directly implement systematic and refined operational measures. This platform is referred to as the "Strategy Platform.”</p>
-<p>In addition to utilizing the complex DAG model, another key feature of the Strategy Platform is the stateful nature of its models. Specifically, the platform records the state information of each user, such as the vertex they occupy in each directed acyclic graph. This statefulness enhances the model’s expressiveness, enabling it to support a wide range of more complex real-world business scenarios.</p>
+<p>In addition to utilizing the complex directed acyclic graph model, another key feature of the Strategy Platform is the stateful nature of its models. Specifically, the platform records the state information of each user, such as the vertex they occupy in each directed acyclic graph. This statefulness enhances the model’s expressiveness, enabling it to support a wide range of more complex real-world business scenarios.</p>
 <p>However, there is no such thing as a free lunch. Storing, writing, and querying these user state data present several challenges:</p>
 <ul>
 <li>The volume of data to be stored is enormous, with an estimated scale of over 1 billion records. This will continue to grow as the platform’s usage and business scale increase.</li>
@@ -147,20 +147,19 @@ C --&gt;|Two| E[Result 2]</code></pre>
 <li>The volume of data to be queried is even larger, with an estimated query throughput (QPS) exceeding 100,000. This will continue to grow with the platform’s usage and business scale</li>
 </ul>
 <h3 id="Mitigation-Measures"><a class="header-anchor" href="#Mitigation-Measures">¶</a>Mitigation Measures</h3>
-<h4 id="Addressing-the-Issue-of-Large-Data-Volumes"><a class="header-anchor" href="#Addressing-the-Issue-of-Large-Data-Volumes">¶</a>Addressing the Issue of Large Data Volumes</h4>
+<p>Addressing the Issue of Large Data Volumes:</p>
 <ul>
 <li>During the database selection phase, Lindorm (a modified version of HBase by Alibaba Cloud) was chosen to support massive data volumes. Additionally, its table-level and row-level TTL (Time to Live) mechanisms allow for easy automatic cleanup of historical data.</li>
 <li>To reduce costs, a shared cluster was selected, which charges based on actual storage, write, and query usage. However, shared clusters can face “noisy neighbor” issues, which may lead to occasional performance fluctuations. Therefore, fault tolerance measures are necessary.</li>
 </ul>
-<h4 id="Addressing-the-Issue-of-High-Write-Volumes"><a class="header-anchor" href="#Addressing-the-Issue-of-High-Write-Volumes">¶</a>Addressing the Issue of High Write Volumes</h4>
+<p>Addressing the Issue of High Write Volumes:</p>
 <ul>
 <li>Lindorm (HBase) is based on the LSM Tree data structure, and all write operations are sequential. Whether using SSDs or HDDs, sequential writes are several times faster than random writes, thus offering significant write performance.</li>
 <li>State data is written in batches after undergoing some merging. This reduces the Write Transactions Per Second (TPS) and increases throughput.</li>
-<li>State data pruning: Before writing, the state data is filtered to retain only the states of vertices in the directed acyclic graph (DAG) that are relied upon by other vertices, rather than storing the state of all vertices involved in the execution. This approach has been proven to significantly reduce the data volume for storage, writing, and querying.</li>
+<li>State data pruning: Before writing, the state data is filtered to retain only the states of vertices in the directed acyclic graph that are relied upon by other vertices, rather than storing the state of all vertices involved in the execution. This approach has been proven to significantly reduce the data volume for storage, writing, and querying.</li>
 <li>To address occasional performance fluctuations in the shared cluster, fault tolerance during database writes is achieved by retrying through message queue. Additionally, the timestamp-based multi-version feature in Lindorm is used to handle data consistency issues that may arise from retry-induced write reordering.</li>
 </ul>
-<h4 id="The-Biggest-Challenge-High-Query-Volumes"><a class="header-anchor" href="#The-Biggest-Challenge-High-Query-Volumes">¶</a>The Biggest Challenge: High Query Volumes</h4>
-<p>The most significant challenge, without a doubt, is handling a large volume of query requests. Relying solely on common caching strategies that focus on temporal locality of reference is not very effective for this problem, for the following reasons:</p>
+<p>The most significant challenge, without a doubt, is handling a large volume of query requests. Relying solely on common caching strategies that focus on temporal locality is not very effective for this problem, for the following reasons:</p>
 <ul>
 <li>In the processing of a single request, repeatedly accessing the same vertex state is rare, so the cache hit rate is expected to be low.</li>
 <li>Introducing a multi-level cache strategy would only distribute part of the query load to stores like Redis, leading to additional costs and increased system dependencies, which may cause a drop in SLA (Service Level Agreement).</li>
@@ -168,20 +167,19 @@ C --&gt;|Two| E[Result 2]</code></pre>
 <p>As a result, a different approach must be taken, focusing on two ideas:</p>
 <ol>
 <li>During data writes, we adopt a batching strategy to combine multiple individual write requests into a single batch to reduce TPS and improve throughput. What corresponding strategy can be applied during query processing?</li>
-<li>Queries are usually user-specific, meaning each request typically involves multiple DAG executions, and each DAG execution involves several vertices. This creates a clear amplification effect: the query load for the state database = request volume × average number of DAGs per request × average number of vertices per DAG.</li>
+<li>Queries are usually user-specific, meaning each request typically involves multiple graph executions, and each graph execution involves several vertices. This creates a clear amplification effect: the query load for the state database = request volume × average number of graphs per request × average number of vertices per graph.</li>
 </ol>
 <blockquote>
 <p>If Idea 1 goes off course, it could result in a strategy where a single data query request is first blocked, waiting to accumulate a certain number of requests or until a specific time threshold is reached before issuing a batch query. While this could indeed achieve batching, it will undoubtedly increase request latency deterministically, and it’s uncertain how many requests can be accumulated, meaning the cost is guaranteed but the effectiveness is not assured. Additionally, requests aggregated in this way are usually for different users, meaning that their physical distribution in the database will be relatively dispersed. Whether batching these requests for a query improves or harms the query performance is uncertain… at least the indexing overhead probably won’t be significantly reduced compared to querying a batch of adjacent data.</p>
 </blockquote>
 <p>Ultimately, both approaches lead to the same conclusion: <strong>the granularity of cache data loading should be greater than the granularity of cache data querying</strong>. This mirrors the concept of cache line design in CPU caches, aiming to exploit the spatial locality of state data query requests.</p>
-<h5 id="State-Table-Key-Structure-and-Caching-Strategy"><a class="header-anchor" href="#State-Table-Key-Structure-and-Caching-Strategy">¶</a>State Table Key Structure and Caching Strategy</h5>
 <p>In the Lindorm database, the primary key for the state table (equivalent to the Rowkey in HBase) is composed of: (userId, graphId, vertexId). Additionally, like HBase, Lindorm supports range queries with leftmost prefix matching.</p>
 <p>To implement the idea that “the granularity of cache data loading should be greater than the granularity of cache data querying,” there are two choices:</p>
 <ol>
-<li><strong>Cache Loading Granularity: (userId, graphId)</strong>
-Querying the state data for a specific vertex in a DAG for a user triggers loading all state data for that user’s vertices in the same DAG into the cache.</li>
-<li><strong>Cache Loading Granularity: (userId)</strong>
-Querying the state data for a specific vertex in a DAG for a user triggers loading all state data for that user’s vertices across all DAGs into the cache.</li>
+<li><strong>Cache Loading Granularity: (userId, graphId)</strong><br>
+Querying the state data for a specific vertex in a graph for a user triggers loading all state data for that user’s vertices in the same graph into the cache.</li>
+<li><strong>Cache Loading Granularity: (userId)</strong><br>
+Querying the state data for a specific vertex in a graph for a user triggers loading all state data for that user’s vertices across all graphs into the cache.</li>
 </ol>
 <p>The cache query granularity depends on the use case, but the (userId, graphId, vertexId) key structure must remain unchanged.</p>
 <p>Here’s a comparison of the various cache loading strategies:</p>
@@ -419,13 +417,13 @@ Querying the state data for a specific vertex in a DAG for a user triggers loadi
     <content><![CDATA[]]></content>
   </entry>
   <entry>
-    <title>Courses</title>
-    <url>/en/courses/index.html</url>
+    <title>Papers</title>
+    <url>/en/papers/index.html</url>
     <content><![CDATA[]]></content>
   </entry>
   <entry>
-    <title>Papers</title>
-    <url>/en/papers/index.html</url>
+    <title>Courses</title>
+    <url>/en/courses/index.html</url>
     <content><![CDATA[]]></content>
   </entry>
   <entry>
