@@ -176,10 +176,8 @@ C --&gt;|Two| E[Result 2]</code></pre>
 <p>In the Lindorm database, the primary key for the state table (equivalent to the Rowkey in HBase) is composed of: (userId, graphId, vertexId). Additionally, like HBase, Lindorm supports range queries with leftmost prefix matching.</p>
 <p>To implement the idea that “the granularity of cache data loading should be greater than the granularity of cache data querying,” there are two choices:</p>
 <ol>
-<li><strong>Cache Loading Granularity: (userId, graphId)</strong><br>
-Querying the state data for a specific vertex in a graph for a user triggers loading all state data for that user’s vertices in the same graph into the cache.</li>
-<li><strong>Cache Loading Granularity: (userId)</strong><br>
-Querying the state data for a specific vertex in a graph for a user triggers loading all state data for that user’s vertices across all graphs into the cache.</li>
+<li><strong>Cache Loading Granularity: (userId, graphId)</strong>. Querying the state data for a specific vertex in a graph for a user triggers loading all state data for that user’s vertices in the same graph into the cache.</li>
+<li><strong>Cache Loading Granularity: (userId)</strong>. Querying the state data for a specific vertex in a graph for a user triggers loading all state data for that user’s vertices across all graphs into the cache.</li>
 </ol>
 <p>The cache query granularity depends on the use case, but the (userId, graphId, vertexId) key structure must remain unchanged.</p>
 <p>Here’s a comparison of the various cache loading strategies:</p>
@@ -191,7 +189,7 @@ Querying the state data for a specific vertex in a graph for a user triggers loa
 <th>Data Volume Loaded</th>
 <th>Load Latency</th>
 <th>Spatial Locality</th>
-<th>Storage Pressure</th>
+<th>Memory Pressure</th>
 </tr>
 </thead>
 <tbody>
@@ -216,7 +214,7 @@ Querying the state data for a specific vertex in a graph for a user triggers loa
 <td>Multiple adjacent rows</td>
 <td>Large</td>
 <td>High</td>
-<td>High</td>
+<td>Strong</td>
 <td>High</td>
 </tr>
 </tbody>
@@ -230,22 +228,22 @@ Querying the state data for a specific vertex in a graph for a user triggers loa
 <th>Cache Loading Granularity</th>
 <th>Cache Query Volume</th>
 <th>Cache Load Volume</th>
-<th>Cache Load Time per Request</th>
+<th>Average Cache Load Time</th>
 <th>Amortized Cache Query Time*</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>(userId, graphId, vertexId)</td>
-<td>68,000/sec</td>
-<td>68,000/sec</td>
+<td>68,000/s</td>
+<td>68,000/s</td>
 <td>1 ms/request</td>
 <td>1 ms/request</td>
 </tr>
 <tr>
 <td>(userId, graphId)</td>
-<td>68,000/sec</td>
-<td>16,000/sec</td>
+<td>68,000/s</td>
+<td>16,000/s</td>
 <td>1.5 ms/request</td>
 <td>0.35 ms/request</td>
 </tr>
@@ -267,29 +265,29 @@ Querying the state data for a specific vertex in a graph for a user triggers loa
 <th>Cache Loading Granularity</th>
 <th>Cache Query Volume</th>
 <th>Cache Load Volume</th>
-<th>Cache Load Time per Request</th>
+<th>Average Cache Load Time</th>
 <th>Amortized Cache Query Time</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>(userId, graphId, vertexId)</td>
-<td>68,000/sec</td>
-<td>68,000/sec</td>
+<td>68,000/s</td>
+<td>68,000/s</td>
 <td>1 ms/request</td>
 <td>1 ms/request</td>
 </tr>
 <tr>
 <td>(userId, graphId)</td>
-<td>68,000/sec</td>
-<td>16,000/sec</td>
+<td>68,000/s</td>
+<td>16,000/s</td>
 <td>1.5 ms/request</td>
 <td>0.35 ms/request</td>
 </tr>
 <tr>
 <td>(userId)</td>
-<td>68,000/sec</td>
-<td>2,800/sec</td>
+<td>68,000/s</td>
+<td>2,800/s</td>
 <td>3.9 ms/request</td>
 <td>0.16 ms/request</td>
 </tr>
@@ -310,7 +308,7 @@ Querying the state data for a specific vertex in a graph for a user triggers loa
 <th>Cache Loading Granularity</th>
 <th>Cache Query Volume</th>
 <th>Cache Load Volume</th>
-<th>Cache Load Time per Request</th>
+<th>Average Cache Load Time</th>
 <th>Amortized Cache Query Time*</th>
 </tr>
 </thead>
@@ -318,16 +316,16 @@ Querying the state data for a specific vertex in a graph for a user triggers loa
 <tr>
 <td>Launch</td>
 <td>(userId)</td>
-<td>68,000/sec</td>
-<td>2,800/sec</td>
+<td>68,000/s</td>
+<td>2,800/s</td>
 <td>3.9 ms/request</td>
 <td>0.16 ms/request</td>
 </tr>
 <tr>
 <td>Current</td>
 <td>(userId)</td>
-<td>717,000/sec</td>
-<td>14,000/sec</td>
+<td>717,000/s</td>
+<td>14,000/s</td>
 <td>1.17 ms/request</td>
 <td>0.02 ms/request</td>
 </tr>
