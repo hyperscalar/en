@@ -147,19 +147,19 @@ C --&gt;|Two| E[Result 2]</code></pre>
 <li><strong>The volume of data to be queried is even larger</strong>, with an estimated query throughput (QPS) exceeding 100,000. This will continue to grow with the platform’s usage and business scale</li>
 </ul>
 <h3 id="Mitigation-Measures"><a class="header-anchor" href="#Mitigation-Measures">¶</a>Mitigation Measures</h3>
-<p><strong>Addressing the Issue of Large Data Volumes</strong>:</p>
+<p><strong>Addressing the Issue of Large Data Volumes</strong></p>
 <ul>
 <li>During the database selection phase, Lindorm (a modified version of HBase by Alibaba Cloud) was chosen to support massive data volumes. Additionally, its table-level and row-level TTL (Time to Live) mechanisms allow for easy automatic cleanup of historical data.</li>
 <li>To reduce costs, a shared cluster was selected, which charges based on actual storage, write, and query usage. However, shared clusters can face “noisy neighbor” issues, which may lead to occasional performance fluctuations. Therefore, fault tolerance measures are necessary.</li>
 </ul>
-<p><strong>Addressing the Issue of High Write Volumes</strong>:</p>
+<p><strong>Addressing the Issue of High Write Volumes</strong></p>
 <ul>
 <li>Lindorm (HBase) is based on the LSM Tree data structure, and all write operations are sequential. Whether using SSDs or HDDs, sequential writes are several times faster than random writes, thus offering significant write performance.</li>
 <li>State data is written in batches after undergoing some merging. This reduces the Write Transactions Per Second (TPS) and increases throughput.</li>
-<li>State data pruning: Before writing, the state data is filtered to retain only the states of vertices in the directed acyclic graph that are relied upon by other vertices, rather than storing the state of all vertices involved in the execution. This approach has been proven to significantly reduce the data volume for storage, writing, and querying.</li>
+<li>State data pruning: Before writing, the state data is filtered to retain only the states of vertices in the directed acyclic graph that are relied upon by other vertices, rather than storing the states of all vertices involved in the execution. This approach has been proven to significantly reduce the data volume for storage, writing, and querying.</li>
 <li>To address occasional performance fluctuations in the shared cluster, fault tolerance during database writes is achieved by retrying through message queue. Additionally, the timestamp-based multi-version feature in Lindorm is used to handle data consistency issues that may arise from retry-induced write reordering.</li>
 </ul>
-<p><strong>Addressing the Biggest Challenge of High Query Volumes</strong>:</p>
+<p><strong>Addressing the Biggest Challenge of High Query Volumes</strong></p>
 <p>The most significant challenge, without a doubt, is handling a large volume of query requests. Relying solely on common caching strategies that focus on temporal locality is not very effective for this problem, for the following reasons:</p>
 <ul>
 <li>In the processing of a single request, repeatedly accessing the same vertex state is rare, so the cache hit rate is expected to be low.</li>
@@ -171,7 +171,7 @@ C --&gt;|Two| E[Result 2]</code></pre>
 <li>Queries are usually user-specific, meaning each request typically involves multiple graph executions, and each graph execution involves several vertices. This creates a clear amplification effect: the query load for the state database = request volume × average number of graphs per request × average number of vertices per graph.</li>
 </ol>
 <blockquote>
-<p>If Idea 1 goes off course, it could result in a strategy where a single data query request is first blocked, waiting to accumulate a certain number of requests or until a specific time threshold is reached before issuing a batch query. While this could indeed achieve batching, it will undoubtedly increase request latency deterministically, and it’s uncertain how many requests can be accumulated, meaning the cost is guaranteed but the effectiveness is not assured. Additionally, requests aggregated in this way are usually for different users, meaning that their physical distribution in the database will be relatively dispersed. Whether batching these requests for a query improves or harms the query performance is uncertain… at least the indexing overhead probably won’t be significantly reduced compared to querying a batch of adjacent data.</p>
+<p>If Idea 1 goes off course, it could result in a strategy where a single data query request is first blocked, waiting to accumulate a certain number of requests or until a specific time threshold is reached before issuing a batch query. While this could indeed achieve batching, it will undoubtedly increase request latency deterministically, and it’s uncertain how many requests can be accumulated, meaning the cost is guaranteed but the effectiveness is not assured. Additionally, requests aggregated in this way are usually for different users, meaning that their physical distribution in the database will be relatively dispersed. Whether batching these requests for a query improves or harms the query performance is uncertain… at least the index overhead probably won’t be significantly reduced compared to querying a batch of adjacent data.</p>
 </blockquote>
 <p>Ultimately, both approaches lead to the same conclusion: <strong>the granularity of cache data loading should be greater than the granularity of cache data querying</strong>. This mirrors the concept of cache line design in CPU caches, aiming to exploit the spatial locality of state data query requests.</p>
 <p><strong>Table Key Structure and Cache Loading Strategies</strong></p>
@@ -251,7 +251,7 @@ C --&gt;|Two| E[Result 2]</code></pre>
 </tr>
 </tbody>
 </table>
-<p><em>Amortized Cache Query Time</em>: This refers to distributing the total cache load time across the total cache query volume. In other words: Cache Load Time per Request × Cache Load Volume ÷ Cache Query Volume.</p>
+<p><em>Amortized Cache Query Time</em>: This refers to distributing the total cache load time across the total cache query volume. In other words: Average Cache Load Time × Cache Load Volume ÷ Cache Query Volume.</p>
 <p>From this, we can observe the following from exploiting spatial locality:</p>
 <ul>
 <li>The cache load volume, which corresponds to the database query volume, was reduced to just 23.5% of its original size.</li>
@@ -345,7 +345,7 @@ C --&gt;|Two| E[Result 2]</code></pre>
 <p>At this point, you may be wondering: what are the trade-offs?</p>
 <ul>
 <li>Could such an aggressive cache loading strategy cause the memory to overflow?</li>
-<li>Is there a risk of having massive data under a single user ID?</li>
+<li>Is there a risk of having massive data under a single user?</li>
 <li>How is the GC (Garbage Collection) pressure?</li>
 <li>Will the memory requirements be excessively high?</li>
 </ul>
@@ -393,6 +393,11 @@ C --&gt;|Two| E[Result 2]</code></pre>
       </tags>
   </entry>
   <entry>
+    <title>Books</title>
+    <url>/en/books/index.html</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
     <title>About</title>
     <url>/en/about/index.html</url>
     <content><![CDATA[<center>Love Computer</center>
@@ -405,11 +410,6 @@ C --&gt;|Two| E[Result 2]</code></pre>
 <br>
 <center>Stay hungry, Stay foolish.</center>
 ]]></content>
-  </entry>
-  <entry>
-    <title>Books</title>
-    <url>/en/books/index.html</url>
-    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>Categories</title>
