@@ -400,16 +400,11 @@ C --&gt;|Two| E[Result 2]</code></pre>
 <center>Love Artificial Intelligence</center>
 <br>
 <center>Geek</center>
-<center>Perfectionist</center>
+<center>Minimalist</center>
 <center>Interest and Curiosity Driven</center>
 <br>
 <center>Stay hungry, Stay foolish.</center>
 ]]></content>
-  </entry>
-  <entry>
-    <title>Books</title>
-    <url>/en/books/index.html</url>
-    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>Categories</title>
@@ -417,8 +412,8 @@ C --&gt;|Two| E[Result 2]</code></pre>
     <content><![CDATA[]]></content>
   </entry>
   <entry>
-    <title>Courses</title>
-    <url>/en/courses/index.html</url>
+    <title>Books</title>
+    <url>/en/books/index.html</url>
     <content><![CDATA[]]></content>
   </entry>
   <entry>
@@ -429,6 +424,11 @@ C --&gt;|Two| E[Result 2]</code></pre>
   <entry>
     <title>Tags</title>
     <url>/en/tags/index.html</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>Courses</title>
+    <url>/en/courses/index.html</url>
     <content><![CDATA[]]></content>
   </entry>
 </search>
