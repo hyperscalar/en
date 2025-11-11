@@ -3,112 +3,112 @@
 
   <url>
     <loc>https://hyperscalar.github.io/en/</loc>
-    <lastmod>2025-02-02</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
     <loc>https://hyperscalar.github.io/en/papers/</loc>
-    <lastmod>2025-02-02</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
     <loc>https://hyperscalar.github.io/en/tags/</loc>
-    <lastmod>2025-02-02</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
     <loc>https://hyperscalar.github.io/en/about/</loc>
-    <lastmod>2025-02-02</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
     <loc>https://hyperscalar.github.io/en/books/</loc>
-    <lastmod>2025-02-02</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
     <loc>https://hyperscalar.github.io/en/categories/</loc>
-    <lastmod>2025-02-02</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
     <loc>https://hyperscalar.github.io/en/courses/</loc>
-    <lastmod>2025-02-02</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
     <loc>https://hyperscalar.github.io/en/posts/Locality-of-Reference-and-Cache/</loc>
-    <lastmod>2025-02-02</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
     <loc>https://hyperscalar.github.io/en/posts/Hello-World/</loc>
-    <lastmod>2025-02-02</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
     <loc>https://hyperscalar.github.io/en/categories/Miscellaneous/</loc>
-    <lastmod>2025-02-02</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
 
   <url>
     <loc>https://hyperscalar.github.io/en/categories/Caching/</loc>
-    <lastmod>2025-02-02</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
 
   <url>
     <loc>https://hyperscalar.github.io/en/tags/Test/</loc>
-    <lastmod>2025-02-02</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
 
   <url>
     <loc>https://hyperscalar.github.io/en/tags/Performance-Engineering/</loc>
-    <lastmod>2025-02-02</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
 
   <url>
     <loc>https://hyperscalar.github.io/en/tags/Computer-Architecture/</loc>
-    <lastmod>2025-02-02</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
 
   <url>
     <loc>https://hyperscalar.github.io/en/tags/Distributed-Systems/</loc>
-    <lastmod>2025-02-02</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
 
   <url>
     <loc>https://hyperscalar.github.io/en/tags/Practical-Experience/</loc>
-    <lastmod>2025-02-02</lastmod>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
