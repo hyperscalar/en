@@ -393,6 +393,16 @@ C --&gt;|Two| E[Result 2]</code></pre>
       </tags>
   </entry>
   <entry>
+    <title>Books</title>
+    <url>/en/books/index.html</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>Categories</title>
+    <url>/en/categories/index.html</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
     <title>About</title>
     <url>/en/about/index.html</url>
     <content><![CDATA[<center>Love Computer</center>
@@ -407,23 +417,13 @@ C --&gt;|Two| E[Result 2]</code></pre>
 ]]></content>
   </entry>
   <entry>
-    <title>Books</title>
-    <url>/en/books/index.html</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>Categories</title>
-    <url>/en/categories/index.html</url>
+    <title>Papers</title>
+    <url>/en/papers/index.html</url>
     <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>Courses</title>
     <url>/en/courses/index.html</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>Papers</title>
-    <url>/en/papers/index.html</url>
     <content><![CDATA[]]></content>
   </entry>
   <entry>

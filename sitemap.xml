@@ -9,13 +9,6 @@
   </url>
 
   <url>
-    <loc>https://hyperscalar.github.io/en/papers/</loc>
-    <lastmod>2025-11-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <url>
     <loc>https://hyperscalar.github.io/en/tags/</loc>
     <lastmod>2025-11-11</lastmod>
     <changefreq>monthly</changefreq>
@@ -23,7 +16,7 @@
   </url>
 
   <url>
-    <loc>https://hyperscalar.github.io/en/about/</loc>
+    <loc>https://hyperscalar.github.io/en/papers/</loc>
     <lastmod>2025-11-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -38,6 +31,13 @@
 
   <url>
     <loc>https://hyperscalar.github.io/en/categories/</loc>
+    <lastmod>2025-11-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://hyperscalar.github.io/en/about/</loc>
     <lastmod>2025-11-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
