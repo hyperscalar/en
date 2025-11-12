@@ -3,8 +3,8 @@ https://hyperscalar.github.io/en/papers/
 https://hyperscalar.github.io/en/tags/
 https://hyperscalar.github.io/en/about/
 https://hyperscalar.github.io/en/books/
-https://hyperscalar.github.io/en/courses/
 https://hyperscalar.github.io/en/categories/
+https://hyperscalar.github.io/en/courses/
 https://hyperscalar.github.io/en/posts/Locality-of-Reference-and-Cache/
 https://hyperscalar.github.io/en/posts/Hello-World/
 https://hyperscalar.github.io/en/categories/Miscellaneous/

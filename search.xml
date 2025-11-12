@@ -412,11 +412,6 @@ C --&gt;|Two| E[Result 2]</code></pre>
     <content><![CDATA[]]></content>
   </entry>
   <entry>
-    <title>Courses</title>
-    <url>/en/courses/index.html</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
     <title>Papers</title>
     <url>/en/papers/index.html</url>
     <content><![CDATA[]]></content>
@@ -424,6 +419,11 @@ C --&gt;|Two| E[Result 2]</code></pre>
   <entry>
     <title>Categories</title>
     <url>/en/categories/index.html</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>Courses</title>
+    <url>/en/courses/index.html</url>
     <content><![CDATA[]]></content>
   </entry>
   <entry>
